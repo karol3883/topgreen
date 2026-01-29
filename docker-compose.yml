@@ -1,0 +1,10 @@
+services:
+  web:
+    image: karol3883/justcode:topgreen
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      NODE_ENV: production
