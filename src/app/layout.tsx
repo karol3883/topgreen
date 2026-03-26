@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Fraunces } from "next/font/google";
+import { Playfair_Display, Sora } from "next/font/google";
 import "./globals.css";
+import ParallaxHero from "@/components/ParallaxHero";
 import RevealInit from "@/components/RevealInit";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "TopGreen — ogrodzenia i bramy",
+  title: "TopGreen — ogrodzenia stalowe i bramy",
   description:
-    "TopGreen — nowoczesne ogrodzenia, bramy i systemy posesyjne. Projekt, produkcja i montaż.",
+    "TopGreen — projekt, produkcja i montaż stalowych ogrodzeń oraz bram. Styl antracyt, pełne wsparcie.",
 };
 
 export default function RootLayout({
@@ -26,8 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={`${bricolage.variable} ${fraunces.variable} antialiased`}>
+      <body className={`${sora.variable} ${playfair.variable} antialiased`}>
         <RevealInit />
+        <ParallaxHero />
         {children}
       </body>
     </html>

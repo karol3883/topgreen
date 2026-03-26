@@ -1,79 +1,126 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-tg-green: #0e8f3b;
-  --color-tg-dark: #0a6f2d;
-  --color-tg-black: #101010;
-  --font-sans: var(--font-bricolage);
-  --font-serif: var(--font-fraunces);
+  --color-tg-primary: #d4af37;
+  --color-tg-primary-hover: #e4c35a;
+  --color-tg-secondary: #e8e3d8;
+  --color-tg-bg: #2c2c2e;
+  --color-tg-alt: #3a3a3c;
+  --color-tg-dark: #141416;
+  --color-tg-muted: rgba(232, 227, 216, 0.72);
+  --color-tg-line: rgba(232, 227, 216, 0.2);
+  --font-sans: var(--font-sora);
+  --font-serif: var(--font-playfair);
 }
 
 @layer components {
   .tg-card {
-    @apply rounded-2xl border border-neutral-200/60 bg-white p-7 shadow-[0_15px_30px_rgba(0,0,0,0.08)];
+    @apply relative overflow-hidden rounded-2xl border p-7;
+    background: var(--color-tg-dark);
+    border-color: var(--color-tg-line);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
   }
 
   .tg-card-lg {
-    @apply rounded-3xl border border-neutral-200/60 bg-white p-8 shadow-[0_18px_40px_rgba(0,0,0,0.1)];
+    @apply relative overflow-hidden rounded-3xl border p-8;
+    background: var(--color-tg-dark);
+    border-color: var(--color-tg-line);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  .tg-sheen {
+    background: linear-gradient(
+      120deg,
+      rgba(232, 227, 216, 0.12),
+      rgba(212, 175, 55, 0.22),
+      rgba(232, 227, 216, 0.12)
+    );
+    background-size: 200% 200%;
+    animation: shine 7s ease-in-out infinite;
+  }
+
+  .tg-stamp {
+    @apply rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.3em] text-tg-muted;
+    background: rgba(20, 20, 22, 0.78);
+    border-color: rgba(212, 175, 55, 0.35);
+  }
+
+  .tg-card::before,
+  .tg-card-lg::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    width: 6px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--color-tg-primary);
+    opacity: 0.9;
+  }
+
+  .section-divider {
+    height: 14px;
+    background: linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.22),
+      rgba(212, 175, 55, 0.08),
+      transparent
+    );
   }
 }
 
 body {
-  background: radial-gradient(circle at top, #f8fbf9 0%, #f0f0f0 55%, #e8e8e8 100%);
-  color: #1b1b1b;
-  font-family: var(--font-bricolage), "Segoe UI", sans-serif;
-}
-
-.hero-bg {
-  background: radial-gradient(circle at 15% 20%, rgba(14, 143, 59, 0.2), transparent 45%),
-    radial-gradient(circle at 80% 0%, rgba(0, 0, 0, 0.15), transparent 40%);
-}
-
-.card-media.slats {
-  background: repeating-linear-gradient(
+  background-color: var(--color-tg-bg);
+  background-image:
+    radial-gradient(1200px 600px at 8% -10%, rgba(212, 175, 55, 0.08), transparent 60%),
+    radial-gradient(900px 480px at 92% 5%, rgba(228, 195, 90, 0.08), transparent 55%),
+    linear-gradient(180deg, #2c2c2e 0%, #2c2c2e 45%, #3a3a3c 100%),
+    repeating-linear-gradient(
       90deg,
-      rgba(14, 143, 59, 0.3),
-      rgba(14, 143, 59, 0.3) 8px,
-      rgba(16, 16, 16, 0.05) 8px,
-      rgba(16, 16, 16, 0.05) 18px
+      rgba(20, 20, 22, 0.35),
+      rgba(20, 20, 22, 0.35) 1px,
+      transparent 1px,
+      transparent 34px
     ),
-    linear-gradient(130deg, #ebf7ef, #cbead7);
+    repeating-linear-gradient(
+      0deg,
+      rgba(20, 20, 22, 0.25),
+      rgba(20, 20, 22, 0.25) 1px,
+      transparent 1px,
+      transparent 34px
+    );
+  color: var(--color-tg-secondary);
+  font-family: var(--font-sora), "Segoe UI", sans-serif;
 }
 
-.card-media.mesh {
-  background: linear-gradient(120deg, #ebf7ef, #dfe3e0);
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(212, 175, 55, 0.6);
+  outline-offset: 3px;
 }
 
-.card-media.mesh::after {
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.steel-panel {
+  background: linear-gradient(135deg, rgba(20, 20, 22, 0.92), rgba(58, 58, 60, 0.9));
+  border: 1px solid var(--color-tg-line);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.steel-panel::after {
   content: "";
   position: absolute;
-  inset: 20px;
-  border: 2px dashed rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-}
-
-.card-media.gate {
-  background: linear-gradient(120deg, #e7e7e7, #c5c5c5);
-}
-
-.card-media.gate::after {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 2px solid rgba(14, 143, 59, 0.35);
-  border-radius: 12px;
-}
-
-.gallery-item {
-  background: linear-gradient(135deg, #dfe7e2, #b9c4be);
-}
-
-.gallery-item::after {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 16px;
+  inset: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 14px;
 }
 
 .reveal {
@@ -114,7 +161,12 @@ body {
 }
 
 .shine-border {
-  background: linear-gradient(120deg, rgba(14, 143, 59, 0.15), rgba(255, 255, 255, 0.6), rgba(14, 143, 59, 0.15));
+  background: linear-gradient(
+    120deg,
+    rgba(20, 20, 22, 0.35),
+    rgba(212, 175, 55, 0.25),
+    rgba(20, 20, 22, 0.35)
+  );
   background-size: 200% 200%;
   animation: shine 6s ease-in-out infinite;
 }
@@ -144,7 +196,7 @@ body {
   bottom: -2px;
   height: 2px;
   width: 100%;
-  background: #0e8f3b;
+  background: var(--color-tg-primary-hover);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s ease;
