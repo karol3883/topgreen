@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOVA FENCE | Galeria realizacji</title>
+    <meta
+      name="description"
+      content="Galeria realizacji NOVA FENCE. Interaktywne filtrowanie projektów według kategorii i roku wykonania."
+    />
+    <style>
+      :root {
+        --bg: #07090d;
+        --bg-deep: #0b0f15;
+        --panel: rgba(15, 20, 28, 0.8);
+        --panel-strong: rgba(11, 15, 22, 0.94);
+        --text: #f3f4f7;
+        --muted: rgba(231, 236, 244, 0.72);
+        --line: rgba(255, 255, 255, 0.1);
+        --gold: #d9b46b;
+        --gold-strong: #f0c97a;
+        --blue-glow: #77b4ff;
+        --shadow-xl: 0 40px 110px rgba(0, 0, 0, 0.54);
+        --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.38);
+        --radius-sm: 20px;
+        --radius-md: 30px;
+        --radius-lg: 46px;
+        --container: min(1240px, calc(100vw - 32px));
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --font-ui: "Segoe UI", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-ui);
+        color: var(--text);
+        background:
+          radial-gradient(circle at 14% 10%, rgba(217, 180, 107, 0.12), transparent 24%),
+          radial-gradient(circle at 88% 14%, rgba(119, 180, 255, 0.1), transparent 24%),
+          radial-gradient(circle at 50% 100%, rgba(217, 180, 107, 0.06), transparent 32%),
+          linear-gradient(180deg, #07090d 0%, #090c12 28%, #0b1017 58%, #07090d 100%);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 84px 84px;
+        mask-image: radial-gradient(circle at center, black 30%, transparent 88%);
+        opacity: 0.24;
+        z-index: -2;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        border: 0;
+        background: none;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgba(217, 180, 107, 0.7);
+        outline-offset: 4px;
+      }
+
+      .container {
+        width: var(--container);
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+      }
+
+      .header-wrap {
+        position: sticky;
+        top: 14px;
+        z-index: 40;
+        padding-top: 14px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 24px;
+        padding: 14px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background: rgba(8, 11, 17, 0.58);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+        transition:
+          background 0.3s var(--ease),
+          border-color 0.3s var(--ease),
+          box-shadow 0.3s var(--ease);
+      }
+
+      .header.is-scrolled {
+        background: rgba(8, 11, 17, 0.88);
+        border-color: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        width: 46px;
+        height: 46px;
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background:
+          linear-gradient(135deg, rgba(217, 180, 107, 0.18), rgba(119, 180, 255, 0.08)),
+          rgba(255, 255, 255, 0.03);
+      }
+
+      .brand-mark::before,
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        width: 3px;
+        border-radius: 999px;
+      }
+
+      .brand-mark::before {
+        left: 13px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 10px 0 0 rgba(255, 255, 255, 0.24);
+      }
+
+      .brand-mark::after {
+        right: 13px;
+        background: linear-gradient(180deg, var(--gold), rgba(217, 180, 107, 0.2));
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-size: 0.96rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .brand-copy span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .nav a {
+        padding: 12px 14px;
+        border-radius: 999px;
+        color: var(--muted);
+        transition:
+          color 0.25s var(--ease),
+          background 0.25s var(--ease);
+      }
+
+      .nav a:hover,
+      .nav a.is-active {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .phone {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .menu-btn {
+        display: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        position: relative;
+      }
+
+      .menu-btn span {
+        position: absolute;
+        left: 12px;
+        width: 22px;
+        height: 2px;
+        background: var(--text);
+        border-radius: 999px;
+        transition: 0.28s var(--ease);
+      }
+
+      .menu-btn span:nth-child(1) { top: 17px; }
+      .menu-btn span:nth-child(2) { top: 23px; }
+      .menu-btn span:nth-child(3) { top: 29px; }
+
+      .menu-btn.is-open span:nth-child(1) {
+        top: 23px;
+        transform: rotate(45deg);
+      }
+
+      .menu-btn.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-btn.is-open span:nth-child(3) {
+        top: 23px;
+        transform: rotate(-45deg);
+      }
+
+      .mobile-menu {
+        display: none;
+      }
+
+      .section {
+        padding: 106px 0 84px;
+      }
+
+      .gallery-hero {
+        position: relative;
+        overflow: hidden;
+        padding: 54px;
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+          rgba(11, 15, 22, 0.88);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .gallery-hero::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .gallery-hero::after {
+        content: "";
+        position: absolute;
+        right: -6%;
+        top: -12%;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(217, 180, 107, 0.22), transparent 70%);
+        filter: blur(18px);
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-copy h1 {
+        margin: 18px 0 16px;
+        font-size: clamp(3rem, 7vw, 5.8rem);
+        line-height: 0.9;
+        letter-spacing: -0.07em;
+        max-width: 11ch;
+      }
+
+      .hero-copy p {
+        margin: 0;
+        max-width: 52ch;
+        color: var(--muted);
+        line-height: 1.9;
+        font-size: 1.02rem;
+      }
+
+      .filters-wrap {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 16px;
+        margin-top: 34px;
+      }
+
+      .filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .filter-label {
+        color: rgba(231, 236, 244, 0.62);
+        font-size: 0.82rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        transition:
+          color 0.25s var(--ease),
+          background 0.25s var(--ease),
+          border-color 0.25s var(--ease),
+          transform 0.25s var(--ease);
+      }
+
+      .chip:hover,
+      .chip.is-active {
+        color: var(--text);
+        border-color: rgba(217, 180, 107, 0.28);
+        background: rgba(255, 255, 255, 0.07);
+        transform: translateY(-2px);
+      }
+
+      .gallery-section {
+        padding: 28px 0 100px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .gallery-card {
+        position: relative;
+        grid-column: span 4;
+        min-height: 320px;
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 45%),
+          rgba(14, 18, 26, 0.92);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(0);
+        transition:
+          transform 0.34s var(--ease),
+          border-color 0.34s var(--ease),
+          opacity 0.28s var(--ease);
+      }
+
+      .gallery-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(217, 180, 107, 0.24);
+      }
+
+      .gallery-card.is-hidden {
+        display: none;
+      }
+
+      .gallery-card button {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        text-align: left;
+      }
+
+      .gallery-card img {
+        width: 100%;
+        height: 100%;
+        min-height: 320px;
+        object-fit: cover;
+        filter: saturate(0.92) contrast(1.02);
+      }
+
+      .gallery-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 24%, rgba(2, 4, 8, 0.88) 100%);
+        pointer-events: none;
+      }
+
+      .gallery-meta {
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+        z-index: 1;
+        padding: 18px 20px;
+        border-radius: 22px;
+        background: rgba(5, 8, 13, 0.58);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(14px);
+      }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .gallery-meta strong {
+        display: block;
+        margin-top: 12px;
+        font-size: 1.2rem;
+        letter-spacing: -0.03em;
+      }
+
+      .gallery-meta span:last-child {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .empty-state {
+        display: none;
+        padding: 42px 28px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+          rgba(11, 15, 22, 0.88);
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .empty-state.is-visible {
+        display: block;
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 70;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(4, 7, 11, 0.82);
+        backdrop-filter: blur(10px);
+      }
+
+      .lightbox.is-open {
+        display: flex;
+      }
+
+      .lightbox-dialog {
+        width: min(1040px, 100%);
+        max-height: calc(100vh - 48px);
+        overflow: hidden;
+        border-radius: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+          rgba(9, 13, 19, 0.96);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .lightbox-media {
+        position: relative;
+        background: rgba(0, 0, 0, 0.28);
+      }
+
+      .lightbox-media img {
+        width: 100%;
+        max-height: min(72vh, 840px);
+        object-fit: cover;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(7, 10, 15, 0.62);
+        backdrop-filter: blur(14px);
+        font-size: 1.4rem;
+      }
+
+      .lightbox-meta {
+        padding: 24px 24px 28px;
+      }
+
+      .lightbox-meta h2 {
+        margin: 14px 0 10px;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+      }
+
+      .lightbox-meta p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .footer {
+        padding: 0 0 54px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        padding: 28px;
+        border-radius: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(12, 16, 24, 0.76);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .footer-grid strong {
+        display: block;
+        margin-bottom: 14px;
+      }
+
+      .footer-grid p,
+      .footer-grid a {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .footer-links,
+      .socials {
+        display: grid;
+        gap: 8px;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 16px;
+        color: rgba(231, 236, 244, 0.54);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 1100px) {
+        .gallery-card {
+          grid-column: span 6;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 920px) {
+        .nav,
+        .header-actions {
+          display: none;
+        }
+
+        .menu-btn {
+          display: inline-flex;
+        }
+
+        .header {
+          grid-template-columns: auto auto;
+        }
+
+        .mobile-menu {
+          display: grid;
+          gap: 14px;
+          margin-top: 14px;
+          padding: 18px;
+          border-radius: 28px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(8, 11, 17, 0.92);
+          backdrop-filter: blur(16px);
+          box-shadow: var(--shadow-lg);
+          opacity: 0;
+          transform: scaleY(0.92);
+          transform-origin: top;
+          pointer-events: none;
+          transition:
+            opacity 0.28s var(--ease),
+            transform 0.28s var(--ease);
+        }
+
+        .mobile-menu.is-open {
+          opacity: 1;
+          transform: scaleY(1);
+          pointer-events: auto;
+        }
+
+        .mobile-link {
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 14px 16px;
+          border-radius: 18px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.04);
+          color: var(--muted);
+        }
+
+        .mobile-link.is-active {
+          color: var(--text);
+          border-color: rgba(217, 180, 107, 0.24);
+        }
+
+        .mobile-actions {
+          display: grid;
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        :root {
+          --container: calc(100vw - 20px);
+        }
+
+        .gallery-hero,
+        .footer-grid {
+          padding: 24px;
+        }
+
+        .hero-copy h1 {
+          font-size: clamp(2.6rem, 13vw, 4.4rem);
+        }
+
+        .gallery-card {
+          grid-column: span 12;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        * ,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          transition-delay: 0ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header-wrap">
+      <div class="container">
+        <nav class="header" aria-label="Główna nawigacja">
+          <a class="brand" href="./index-v3.html" aria-label="NOVA FENCE - strona główna">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-copy">
+              <strong>NOVA FENCE</strong>
+              <span>Luxury fencing systems</span>
+            </span>
+          </a>
+
+          <div class="nav">
+            <a href="./index-v3.html">Strona główna</a>
+            <a href="./index-v3.html#oferta">Oferta</a>
+            <a class="is-active" href="#galeria">Galeria</a>
+            <a href="./index-v3.html#kontakt">Kontakt</a>
+          </div>
+
+          <div class="header-actions">
+            <a class="phone" href="tel:+48123456789">+48 123 456 789</a>
+          </div>
+
+          <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </nav>
+
+        <div class="mobile-menu" id="mobileMenu">
+          <a class="mobile-link" href="./index-v3.html">Strona główna <span>01</span></a>
+          <a class="mobile-link" href="./index-v3.html#oferta">Oferta <span>02</span></a>
+          <a class="mobile-link is-active" href="#galeria">Galeria <span>03</span></a>
+          <a class="mobile-link" href="./kontakt.html">Kontakt <span>04</span></a>
+          <div class="mobile-actions">
+            <a class="chip" href="tel:+48123456789">+48 123 456 789</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="galeria">
+        <div class="container">
+          <div class="gallery-hero">
+            <div class="hero-copy">
+              <span class="eyebrow">Galeria realizacji</span>
+              <h1>Wybrane realizacje.</h1>
+              <p>Przeglądaj projekty według kategorii i roku wykonania. Kliknij zdjęcie, aby otworzyć podgląd.</p>
+            </div>
+
+            <div class="filters-wrap" aria-label="Filtry galerii">
+              <div class="filter-group" role="group" aria-label="Kategorie">
+                <span class="filter-label">Kategorie</span>
+                <button class="chip is-active" type="button" data-filter-group="category" data-filter-value="all">Wszystkie</button>
+                <button class="chip" type="button" data-filter-group="category" data-filter-value="bramy">Bramy</button>
+                <button class="chip" type="button" data-filter-group="category" data-filter-value="ogrodzenia">Ogrodzenia</button>
+                <button class="chip" type="button" data-filter-group="category" data-filter-value="furtki">Furtki</button>
+              </div>
+
+              <div class="filter-group" role="group" aria-label="Lata produkcji">
+                <span class="filter-label">Lata</span>
+                <button class="chip is-active" type="button" data-filter-group="year" data-filter-value="all">Wszystkie</button>
+                <button class="chip" type="button" data-filter-group="year" data-filter-value="2026">2026</button>
+                <button class="chip" type="button" data-filter-group="year" data-filter-value="2025">2025</button>
+                <button class="chip" type="button" data-filter-group="year" data-filter-value="2024">2024</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="container">
+          <div class="gallery-grid" id="galleryGrid">
+            <article class="gallery-card" data-category="bramy" data-year="2026">
+              <button type="button" data-preview-src="https://picsum.photos/id/1018/1600/1100" data-preview-title="Brama przesuwna / Warszawa" data-preview-text="Realizacja w kategorii bramy z roku 2026.">
+                <img src="https://picsum.photos/id/1018/900/700" alt="Brama przesuwna w nowoczesnej zabudowie" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Bramy</span>
+                    <span class="badge">2026</span>
+                  </div>
+                  <strong>Brama przesuwna / Warszawa</strong>
+                  <span>Kompaktowa forma wejścia z mocnym rytmem profili.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="ogrodzenia" data-year="2026">
+              <button type="button" data-preview-src="https://picsum.photos/id/1025/1600/1100" data-preview-title="Ogrodzenie frontowe / Gdańsk" data-preview-text="Realizacja w kategorii ogrodzenia z roku 2026.">
+                <img src="https://picsum.photos/id/1025/900/700" alt="Ogrodzenie frontowe przy nowoczesnym domu" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Ogrodzenia</span>
+                    <span class="badge">2026</span>
+                  </div>
+                  <strong>Ogrodzenie frontowe / Gdańsk</strong>
+                  <span>Minimalistyczna linia dopasowana do spokojnej elewacji.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="furtki" data-year="2026">
+              <button type="button" data-preview-src="https://picsum.photos/id/1035/1600/1100" data-preview-title="Furtka nowoczesna / Poznań" data-preview-text="Realizacja w kategorii furtki z roku 2026.">
+                <img src="https://picsum.photos/id/1035/900/700" alt="Nowoczesna furtka i wejście do posesji" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Furtki</span>
+                    <span class="badge">2026</span>
+                  </div>
+                  <strong>Furtka nowoczesna / Poznań</strong>
+                  <span>Subtelne wejście z wyważonym, premium detalem.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="bramy" data-year="2025">
+              <button type="button" data-preview-src="https://picsum.photos/id/1043/1600/1100" data-preview-title="Brama skrzydłowa / Wrocław" data-preview-text="Realizacja w kategorii bramy z roku 2025.">
+                <img src="https://picsum.photos/id/1043/900/700" alt="Brama skrzydłowa przy rezydencji" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Bramy</span>
+                    <span class="badge">2025</span>
+                  </div>
+                  <strong>Brama skrzydłowa / Wrocław</strong>
+                  <span>Szerszy front o bardziej reprezentacyjnym charakterze.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="ogrodzenia" data-year="2025">
+              <button type="button" data-preview-src="https://picsum.photos/id/1050/1600/1100" data-preview-title="Ogrodzenie osiedlowe / Kraków" data-preview-text="Realizacja w kategorii ogrodzenia z roku 2025.">
+                <img src="https://picsum.photos/id/1050/900/700" alt="Ogrodzenie osiedlowe z nowoczesnym rytmem" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Ogrodzenia</span>
+                    <span class="badge">2025</span>
+                  </div>
+                  <strong>Ogrodzenie osiedlowe / Kraków</strong>
+                  <span>System o większej skali, ale w tym samym języku formalnym.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="furtki" data-year="2025">
+              <button type="button" data-preview-src="https://picsum.photos/id/1067/1600/1100" data-preview-title="Furtka wejściowa / Łódź" data-preview-text="Realizacja w kategorii furtki z roku 2025.">
+                <img src="https://picsum.photos/id/1067/900/700" alt="Furtka wejściowa z nowoczesnym detalem" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Furtki</span>
+                    <span class="badge">2025</span>
+                  </div>
+                  <strong>Furtka wejściowa / Łódź</strong>
+                  <span>Spójne wejście z naciskiem na proporcję i lekkość formy.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="bramy" data-year="2024">
+              <button type="button" data-preview-src="https://picsum.photos/id/1074/1600/1100" data-preview-title="Brama frontowa / Lublin" data-preview-text="Realizacja w kategorii bramy z roku 2024.">
+                <img src="https://picsum.photos/id/1074/900/700" alt="Brama frontowa do luksusowej posesji" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Bramy</span>
+                    <span class="badge">2024</span>
+                  </div>
+                  <strong>Brama frontowa / Lublin</strong>
+                  <span>Wyrazista strefa wjazdu z bardziej monumentalnym akcentem.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="ogrodzenia" data-year="2024">
+              <button type="button" data-preview-src="https://picsum.photos/id/1084/1600/1100" data-preview-title="Ogrodzenie posesji / Katowice" data-preview-text="Realizacja w kategorii ogrodzenia z roku 2024.">
+                <img src="https://picsum.photos/id/1084/900/700" alt="Ogrodzenie posesji przy budynku premium" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Ogrodzenia</span>
+                    <span class="badge">2024</span>
+                  </div>
+                  <strong>Ogrodzenie posesji / Katowice</strong>
+                  <span>Spokojna zabudowa frontu z naciskiem na elegancję materiału.</span>
+                </div>
+              </button>
+            </article>
+
+            <article class="gallery-card" data-category="furtki" data-year="2024">
+              <button type="button" data-preview-src="https://picsum.photos/id/1080/1600/1100" data-preview-title="Furtka frontowa / Szczecin" data-preview-text="Realizacja w kategorii furtki z roku 2024.">
+                <img src="https://picsum.photos/id/1080/900/700" alt="Furtka frontowa do nowoczesnej inwestycji" loading="lazy" />
+                <div class="gallery-meta">
+                  <div class="badges">
+                    <span class="badge">Furtki</span>
+                    <span class="badge">2024</span>
+                  </div>
+                  <strong>Furtka frontowa / Szczecin</strong>
+                  <span>Dopracowany detal wejścia jako część kompletnego systemu.</span>
+                </div>
+              </button>
+            </article>
+          </div>
+
+          <div class="empty-state" id="emptyState">Brak realizacji dla wybranych filtrów.</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <strong>NOVA FENCE</strong>
+            <p>Producent luksusowych ogrodzeń, bram i furtek dla inwestycji prywatnych oraz komercyjnych.</p>
+          </div>
+          <div>
+            <strong>Kontakt</strong>
+            <p>+48 123 456 789</p>
+            <p>kontakt@novafence.pl</p>
+            <p>ul. Przemysłowa 18<br />00-000 Warszawa</p>
+          </div>
+          <div>
+            <strong>Nawigacja</strong>
+            <div class="footer-links">
+              <a href="./index-v3.html">Strona główna</a>
+              <a href="./kontakt.html">Kontakt</a>
+              <a href="#galeria">Galeria</a>
+            </div>
+          </div>
+          <div>
+            <strong>Social</strong>
+            <div class="socials">
+              <a href="#">Instagram</a>
+              <a href="#">Facebook</a>
+              <a href="#">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 NOVA FENCE. Wszelkie prawa zastrzeżone.</span>
+          <span>Luxury fencing systems for modern architecture.</span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <div class="lightbox-dialog">
+        <div class="lightbox-media">
+          <img id="lightboxImage" alt="" />
+          <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Zamknij podgląd">×</button>
+        </div>
+        <div class="lightbox-meta">
+          <div class="badges" id="lightboxBadges"></div>
+          <h2 id="lightboxTitle"></h2>
+          <p id="lightboxText"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        const body = document.body;
+        const header = document.querySelector(".header");
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        const chips = [...document.querySelectorAll("[data-filter-group]")];
+        const cards = [...document.querySelectorAll(".gallery-card")];
+        const emptyState = document.getElementById("emptyState");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const lightboxTitle = document.getElementById("lightboxTitle");
+        const lightboxText = document.getElementById("lightboxText");
+        const lightboxBadges = document.getElementById("lightboxBadges");
+        const lightboxClose = document.getElementById("lightboxClose");
+        const filters = { category: "all", year: "all" };
+
+        const syncHeader = () => {
+          header?.classList.toggle("is-scrolled", window.scrollY > 24);
+        };
+
+        syncHeader();
+        window.addEventListener("scroll", syncHeader, { passive: true });
+
+        const closeMenu = () => {
+          menuBtn?.classList.remove("is-open");
+          menuBtn?.setAttribute("aria-expanded", "false");
+          mobileMenu?.classList.remove("is-open");
+          body.style.overflow = "";
+        };
+
+        menuBtn?.addEventListener("click", () => {
+          const isOpen = menuBtn.classList.contains("is-open");
+          if (isOpen) {
+            closeMenu();
+          } else {
+            menuBtn.classList.add("is-open");
+            menuBtn.setAttribute("aria-expanded", "true");
+            mobileMenu?.classList.add("is-open");
+            body.style.overflow = "hidden";
+          }
+        });
+
+        mobileMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+
+        const renderFilters = () => {
+          let visibleCount = 0;
+
+          cards.forEach((card) => {
+            const matchCategory = filters.category === "all" || card.dataset.category === filters.category;
+            const matchYear = filters.year === "all" || card.dataset.year === filters.year;
+            const visible = matchCategory && matchYear;
+
+            card.classList.toggle("is-hidden", !visible);
+            if (visible) visibleCount += 1;
+          });
+
+          emptyState?.classList.toggle("is-visible", visibleCount === 0);
+        };
+
+        chips.forEach((chip) => {
+          chip.addEventListener("click", () => {
+            const group = chip.dataset.filterGroup;
+            const value = chip.dataset.filterValue;
+            if (!group || !value) return;
+
+            filters[group] = value;
+
+            chips
+              .filter((item) => item.dataset.filterGroup === group)
+              .forEach((item) => item.classList.toggle("is-active", item === chip));
+
+            renderFilters();
+          });
+        });
+
+        const openLightbox = (button) => {
+          const card = button.closest(".gallery-card");
+          if (!card) return;
+
+          lightboxImage.src = button.dataset.previewSrc || "";
+          lightboxImage.alt = button.querySelector("img")?.alt || "";
+          lightboxTitle.textContent = button.dataset.previewTitle || "";
+          lightboxText.textContent = button.dataset.previewText || "";
+          lightboxBadges.innerHTML = "";
+
+          const category = card.dataset.category || "";
+          const year = card.dataset.year || "";
+
+          [category, year].forEach((value) => {
+            const badge = document.createElement("span");
+            badge.className = "badge";
+            badge.textContent = value;
+            lightboxBadges.appendChild(badge);
+          });
+
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+          body.style.overflow = "hidden";
+        };
+
+        const closeLightbox = () => {
+          lightbox.classList.remove("is-open");
+          lightbox.setAttribute("aria-hidden", "true");
+          body.style.overflow = "";
+          lightboxImage.src = "";
+        };
+
+        document.querySelectorAll(".gallery-card button").forEach((button) => {
+          button.addEventListener("click", () => openLightbox(button));
+        });
+
+        lightboxClose?.addEventListener("click", closeLightbox);
+        lightbox?.addEventListener("click", (event) => {
+          if (event.target === lightbox) closeLightbox();
+        });
+
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+            closeLightbox();
+          }
+        });
+
+        renderFilters();
+      })();
+    </script>
+  </body>
+</html>

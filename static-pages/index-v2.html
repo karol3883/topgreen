@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOVA FENCE | Ogrodzenia, bramy i furtki klasy premium</title>
+    <meta
+      name="description"
+      content="NOVA FENCE tworzy nowoczesne ogrodzenia, bramy i furtki dla domów oraz inwestycji komercyjnych. Wyrazisty design, własna produkcja i precyzja wykonania."
+    />
+    <style>
+      :root {
+        --bg: #07090d;
+        --bg-soft: #0e1219;
+        --panel: rgba(16, 20, 28, 0.84);
+        --panel-strong: rgba(12, 16, 24, 0.96);
+        --panel-light: rgba(255, 255, 255, 0.04);
+        --text: #f3f4f7;
+        --muted: rgba(231, 236, 244, 0.72);
+        --line: rgba(255, 255, 255, 0.1);
+        --line-strong: rgba(255, 255, 255, 0.18);
+        --gold: #d9b46b;
+        --gold-strong: #f0c97a;
+        --steel: #8ea3bf;
+        --blue-glow: #77b4ff;
+        --shadow-xl: 0 38px 100px rgba(0, 0, 0, 0.52);
+        --shadow-lg: 0 24px 58px rgba(0, 0, 0, 0.38);
+        --radius-sm: 18px;
+        --radius-md: 28px;
+        --radius-lg: 42px;
+        --radius-xl: 64px;
+        --container: min(1240px, calc(100vw - 32px));
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --font-ui: "Segoe UI", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-ui);
+        color: var(--text);
+        background:
+          radial-gradient(circle at 15% 10%, rgba(217, 180, 107, 0.12), transparent 24%),
+          radial-gradient(circle at 86% 18%, rgba(119, 180, 255, 0.14), transparent 24%),
+          linear-gradient(180deg, #07090d 0%, #090c12 25%, #0b1118 60%, #07090d 100%);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: radial-gradient(circle at center, black 32%, transparent 90%);
+        opacity: 0.28;
+        z-index: -2;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        cursor: pointer;
+        color: inherit;
+        background: none;
+        border: 0;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgba(217, 180, 107, 0.7);
+        outline-offset: 4px;
+      }
+
+      .container {
+        width: var(--container);
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+      }
+
+      .section {
+        position: relative;
+        padding: 110px 0;
+      }
+
+      .section-header {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 32px;
+        align-items: end;
+        margin-bottom: 48px;
+      }
+
+      .section-header h2 {
+        margin: 18px 0 0;
+        font-size: clamp(2.2rem, 4.2vw, 4.8rem);
+        line-height: 0.93;
+        letter-spacing: -0.05em;
+      }
+
+      .section-header p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .divider {
+        position: relative;
+      }
+
+      .divider::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(94%, 1100px);
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        transition:
+          opacity 0.9s var(--ease),
+          transform 0.9s var(--ease);
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .header-wrap {
+        position: sticky;
+        top: 14px;
+        z-index: 40;
+        padding-top: 14px;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 24px;
+        padding: 14px 18px;
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(8, 11, 17, 0.64);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+        transition:
+          background 0.3s var(--ease),
+          border-color 0.3s var(--ease),
+          box-shadow 0.3s var(--ease);
+      }
+
+      .header.is-scrolled {
+        background: rgba(8, 11, 17, 0.9);
+        border-color: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .logo-mark {
+        width: 44px;
+        height: 44px;
+        position: relative;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background:
+          linear-gradient(135deg, rgba(217, 180, 107, 0.16), rgba(119, 180, 255, 0.1)),
+          rgba(255, 255, 255, 0.03);
+        overflow: hidden;
+      }
+
+      .logo-mark::before,
+      .logo-mark::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        bottom: 8px;
+        width: 3px;
+        border-radius: 999px;
+      }
+
+      .logo-mark::before {
+        left: 13px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 9px 0 0 rgba(255, 255, 255, 0.24);
+      }
+
+      .logo-mark::after {
+        right: 13px;
+        background: linear-gradient(180deg, var(--gold), rgba(217, 180, 107, 0.2));
+      }
+
+      .logo-copy strong {
+        display: block;
+        font-size: 0.95rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .logo-copy span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .nav a {
+        padding: 12px 14px;
+        border-radius: 999px;
+        color: var(--muted);
+        transition:
+          color 0.25s var(--ease),
+          background 0.25s var(--ease);
+      }
+
+      .nav a:hover,
+      .nav a.is-active {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .header-actions .phone {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .menu-btn {
+        display: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        position: relative;
+      }
+
+      .menu-btn span {
+        position: absolute;
+        left: 12px;
+        width: 22px;
+        height: 2px;
+        background: var(--text);
+        border-radius: 999px;
+        transition: 0.28s var(--ease);
+      }
+
+      .menu-btn span:nth-child(1) { top: 17px; }
+      .menu-btn span:nth-child(2) { top: 23px; }
+      .menu-btn span:nth-child(3) { top: 29px; }
+
+      .menu-btn.is-open span:nth-child(1) {
+        top: 23px;
+        transform: rotate(45deg);
+      }
+
+      .menu-btn.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-btn.is-open span:nth-child(3) {
+        top: 23px;
+        transform: rotate(-45deg);
+      }
+
+      .mobile-menu {
+        display: none;
+      }
+
+      .btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 54px;
+        padding: 0 24px;
+        border-radius: 999px;
+        font-weight: 700;
+        transition:
+          transform 0.28s var(--ease),
+          box-shadow 0.28s var(--ease),
+          background 0.28s var(--ease),
+          border-color 0.28s var(--ease);
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold-strong), var(--gold));
+        color: #111316;
+        box-shadow: 0 18px 36px rgba(217, 180, 107, 0.24);
+      }
+
+      .btn-ghost {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        align-items: center;
+        padding: 74px 0 88px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 26px;
+        align-items: stretch;
+      }
+
+      .hero-left {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        gap: 22px;
+      }
+
+      .hero-copy {
+        padding: 14px 0 0;
+      }
+
+      .hero-copy h1 {
+        margin: 20px 0 22px;
+        font-size: clamp(3rem, 7vw, 7rem);
+        line-height: 0.9;
+        letter-spacing: -0.06em;
+        max-width: 10ch;
+      }
+
+      .hero-copy p {
+        margin: 0;
+        max-width: 620px;
+        color: var(--muted);
+        font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+        line-height: 1.9;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 32px;
+      }
+
+      .hero-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .hero-metric {
+        padding: 18px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 22px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+          rgba(12, 16, 24, 0.72);
+      }
+
+      .hero-metric strong {
+        display: block;
+        font-size: 1.4rem;
+      }
+
+      .hero-metric span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 0.95rem;
+      }
+
+      .hero-stage {
+        position: relative;
+        min-height: 760px;
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+          linear-gradient(145deg, rgba(9, 12, 18, 0.98), rgba(18, 24, 34, 0.92));
+        box-shadow: var(--shadow-xl);
+      }
+
+      .hero-stage::before {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border-radius: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .hero-gridlines {
+        position: absolute;
+        inset: 34px;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 74px 74px;
+        border-radius: 34px;
+        mask-image: linear-gradient(180deg, black, rgba(0, 0, 0, 0.15));
+      }
+
+      .structure {
+        position: absolute;
+        inset: 68px 54px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        grid-template-rows: 1.1fr 0.9fr;
+        gap: 18px;
+      }
+
+      .structure-panel {
+        position: relative;
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01)),
+          rgba(14, 18, 26, 0.94);
+      }
+
+      .structure-panel--fence::before {
+        content: "";
+        position: absolute;
+        inset: 24px;
+        border-radius: 22px;
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0 3px, transparent 3px 11%),
+          linear-gradient(90deg, rgba(217, 180, 107, 0.22) 0 2px, transparent 2px 36%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 70%);
+        background-size: 8.5% 100%, 14% 100%, 100% 100%;
+      }
+
+      .structure-panel--gate::before {
+        content: "";
+        position: absolute;
+        inset: 24px;
+        border-radius: 22px;
+        background:
+          linear-gradient(90deg, transparent 0 62%, rgba(255, 255, 255, 0.09) 62% 64%, transparent 64% 100%),
+          linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 3px, transparent 3px 55%),
+          radial-gradient(circle at 72% 20%, rgba(217, 180, 107, 0.24), transparent 26%);
+      }
+
+      .structure-panel--entry::before {
+        content: "";
+        position: absolute;
+        inset: 24px 38% 24px 24px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background:
+          linear-gradient(90deg, transparent 0 44%, rgba(255, 255, 255, 0.1) 44% 48%, transparent 48% 100%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 70%);
+      }
+
+      .structure-panel--copy {
+        padding: 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 14px;
+      }
+
+      .structure-panel--copy strong {
+        font-size: 1.9rem;
+        line-height: 1;
+      }
+
+      .structure-panel--copy p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(14px);
+        position: absolute;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+      }
+
+      .hero-tag strong {
+        font-size: 0.95rem;
+      }
+
+      .hero-tag span {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .hero-tag--one {
+        top: 42px;
+        right: 34px;
+      }
+
+      .hero-tag--two {
+        bottom: 42px;
+        left: 28px;
+      }
+
+      .hero-tag__dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(217, 180, 107, 0.24), rgba(119, 180, 255, 0.16));
+      }
+
+      .hero-angle {
+        position: absolute;
+        width: 220px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.44), transparent);
+        transform: rotate(-38deg);
+        opacity: 0.38;
+      }
+
+      .hero-angle--a {
+        top: 120px;
+        left: -70px;
+      }
+
+      .hero-angle--b {
+        right: -40px;
+        bottom: 120px;
+      }
+
+      .manifesto {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 22px;
+      }
+
+      .manifesto-main,
+      .manifesto-side {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+          rgba(11, 15, 22, 0.88);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .manifesto-main {
+        padding: 38px;
+        border-radius: 42px;
+      }
+
+      .manifesto-main h2 {
+        margin: 18px 0 18px;
+        font-size: clamp(2.2rem, 4vw, 4.4rem);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+      }
+
+      .manifesto-main p {
+        margin: 0;
+        max-width: 62ch;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .manifesto-values {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .manifesto-value {
+        padding: 18px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .manifesto-value strong {
+        display: block;
+        font-size: 1.12rem;
+      }
+
+      .manifesto-value span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .manifesto-side {
+        border-radius: 42px;
+        padding: 20px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .side-card {
+        border-radius: 28px;
+        padding: 22px;
+        min-height: 180px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+          rgba(15, 20, 28, 0.88);
+      }
+
+      .side-card strong {
+        display: block;
+        margin-top: 16px;
+        font-size: 1.4rem;
+      }
+
+      .side-card p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .mini-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(217, 180, 107, 0.18), rgba(119, 180, 255, 0.1));
+        color: var(--gold-strong);
+      }
+
+      .cards-usp {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .usp {
+        position: relative;
+        overflow: hidden;
+        min-height: 300px;
+        padding: 28px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+          rgba(12, 16, 24, 0.82);
+        box-shadow: var(--shadow-lg);
+        transition:
+          transform 0.35s var(--ease),
+          border-color 0.35s var(--ease),
+          box-shadow 0.35s var(--ease);
+      }
+
+      .usp::before,
+      .offer::before,
+      .showcase-card::before,
+      .step::before,
+      .testimonial::before,
+      .cta-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(217, 180, 107, 0.15), transparent 36%);
+        opacity: 0;
+        transition: opacity 0.35s var(--ease);
+      }
+
+      .usp:hover,
+      .offer:hover,
+      .showcase-card:hover,
+      .step:hover,
+      .testimonial:hover,
+      .cta-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(217, 180, 107, 0.26);
+        box-shadow: 0 34px 84px rgba(0, 0, 0, 0.42);
+      }
+
+      .usp:hover::before,
+      .offer:hover::before,
+      .showcase-card:hover::before,
+      .step:hover::before,
+      .testimonial:hover::before,
+      .cta-card:hover::before {
+        opacity: 1;
+      }
+
+      .usp h3,
+      .offer h3,
+      .showcase-card strong,
+      .step h3,
+      .testimonial blockquote,
+      .cta-main h2 {
+        letter-spacing: -0.04em;
+      }
+
+      .usp h3 {
+        margin: 22px 0 14px;
+        font-size: 1.45rem;
+      }
+
+      .usp p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .offers {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .offer {
+        position: relative;
+        min-height: 480px;
+        padding: 24px;
+        border-radius: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+          rgba(12, 16, 24, 0.84);
+        box-shadow: var(--shadow-lg);
+        display: grid;
+        align-content: space-between;
+        overflow: hidden;
+        transition:
+          transform 0.4s var(--ease),
+          box-shadow 0.4s var(--ease),
+          border-color 0.4s var(--ease);
+      }
+
+      .offer-stage {
+        position: relative;
+        min-height: 250px;
+        border-radius: 26px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)),
+          rgba(16, 20, 28, 0.9);
+        overflow: hidden;
+      }
+
+      .offer-stage::before {
+        content: "";
+        position: absolute;
+        inset: 20px;
+        border-radius: 20px;
+      }
+
+      .offer--fence .offer-stage::before {
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0 3px, transparent 3px 10%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 66%);
+        background-size: 9.5% 100%, 100% 100%;
+      }
+
+      .offer--gate .offer-stage::before {
+        background:
+          linear-gradient(90deg, transparent 0 58%, rgba(255, 255, 255, 0.1) 58% 60%, transparent 60% 100%),
+          linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 3px, transparent 3px 60%);
+      }
+
+      .offer--wicket .offer-stage::before {
+        background:
+          linear-gradient(90deg, transparent 0 42%, rgba(255, 255, 255, 0.1) 42% 46%, transparent 46% 100%),
+          linear-gradient(180deg, rgba(119, 180, 255, 0.12), transparent 50%);
+      }
+
+      .offer-label,
+      .city-pill,
+      .step-pill,
+      .quote-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .offer h3 {
+        margin: 18px 0 14px;
+        font-size: 2rem;
+      }
+
+      .offer p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.85;
+      }
+
+      .offer-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 22px;
+        font-weight: 700;
+        transition: gap 0.28s var(--ease), color 0.28s var(--ease);
+      }
+
+      .offer-link:hover {
+        gap: 16px;
+        color: var(--gold-strong);
+      }
+
+      .proof {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 18px;
+      }
+
+      .proof-main,
+      .proof-stats {
+        border-radius: 38px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+          rgba(12, 16, 24, 0.84);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .proof-main {
+        padding: 38px;
+      }
+
+      .proof-main h2 {
+        margin: 18px 0;
+        font-size: clamp(2.2rem, 4vw, 4.4rem);
+        line-height: 0.95;
+      }
+
+      .proof-main > p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .proof-list {
+        display: grid;
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .proof-item {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 16px;
+        padding: 16px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .proof-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        color: var(--gold-strong);
+        background: linear-gradient(135deg, rgba(217, 180, 107, 0.18), rgba(119, 180, 255, 0.08));
+      }
+
+      .proof-item strong {
+        display: block;
+        font-size: 1.05rem;
+      }
+
+      .proof-item span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .proof-stats {
+        padding: 18px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .stat {
+        position: relative;
+        min-height: 220px;
+        padding: 22px;
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+          rgba(14, 18, 26, 0.9);
+        overflow: hidden;
+      }
+
+      .stat::before {
+        content: "";
+        position: absolute;
+        inset: auto -15% -40% auto;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(217, 180, 107, 0.16), transparent 70%);
+      }
+
+      .stat strong {
+        display: block;
+        margin-top: 30px;
+        font-size: clamp(2rem, 3vw, 3.2rem);
+        line-height: 0.95;
+      }
+
+      .stat span {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .stat--wide {
+        grid-column: 1 / -1;
+        min-height: 250px;
+      }
+
+      .showcase {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .showcase-card {
+        position: relative;
+        min-height: 280px;
+        overflow: hidden;
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 46%),
+          rgba(13, 17, 25, 0.92);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .showcase-card:nth-child(1) {
+        grid-column: span 5;
+        min-height: 520px;
+      }
+
+      .showcase-card:nth-child(2) {
+        grid-column: span 7;
+        min-height: 520px;
+      }
+
+      .showcase-card:nth-child(3),
+      .showcase-card:nth-child(4),
+      .showcase-card:nth-child(5) {
+        grid-column: span 4;
+      }
+
+      .showcase-art {
+        position: absolute;
+        inset: 0;
+      }
+
+      .showcase-art::before {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border-radius: 22px;
+      }
+
+      .showcase-card--01 .showcase-art::before {
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0 3px, transparent 3px 10%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 72%);
+        background-size: 10% 100%, 100% 100%;
+      }
+
+      .showcase-card--02 .showcase-art::before {
+        background:
+          linear-gradient(90deg, transparent 0 64%, rgba(255, 255, 255, 0.1) 64% 66%, transparent 66% 100%),
+          linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 3px, transparent 3px 55%);
+      }
+
+      .showcase-card--03 .showcase-art::before {
+        background:
+          linear-gradient(90deg, transparent 0 44%, rgba(255, 255, 255, 0.1) 44% 48%, transparent 48% 100%),
+          linear-gradient(135deg, rgba(119, 180, 255, 0.12), transparent 46%);
+      }
+
+      .showcase-card--04 .showcase-art::before {
+        background:
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08) 2px, transparent 2px, transparent 18px),
+          linear-gradient(135deg, rgba(217, 180, 107, 0.14), transparent 42%);
+      }
+
+      .showcase-card--05 .showcase-art::before {
+        background:
+          linear-gradient(135deg, rgba(217, 180, 107, 0.2), transparent 34%),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0 3px, transparent 3px 13%);
+        background-size: 100% 100%, 13% 100%;
+      }
+
+      .showcase-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 20%, rgba(2, 4, 8, 0.86) 100%);
+      }
+
+      .showcase-meta {
+        position: absolute;
+        inset: auto 20px 20px 20px;
+        z-index: 1;
+        padding: 18px 20px;
+        border-radius: 22px;
+        background: rgba(5, 8, 13, 0.58);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition:
+          transform 0.3s var(--ease),
+          border-color 0.3s var(--ease);
+      }
+
+      .showcase-card:hover .showcase-meta {
+        transform: translateY(-4px);
+        border-color: rgba(217, 180, 107, 0.24);
+      }
+
+      .showcase-meta strong {
+        display: block;
+        margin-top: 10px;
+        font-size: 1.16rem;
+      }
+
+      .showcase-meta span:last-child {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .process {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .step {
+        position: relative;
+        min-height: 290px;
+        padding: 24px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+          rgba(12, 16, 24, 0.84);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .step-number {
+        font-size: clamp(3rem, 5vw, 4.4rem);
+        line-height: 0.9;
+        color: rgba(255, 255, 255, 0.18);
+        font-weight: 800;
+        letter-spacing: -0.06em;
+      }
+
+      .step h3 {
+        margin: 18px 0 12px;
+        font-size: 1.46rem;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .testimonials {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .testimonial {
+        position: relative;
+        min-height: 320px;
+        padding: 26px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+          rgba(12, 16, 24, 0.84);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .testimonial blockquote {
+        margin: 20px 0 24px;
+        font-size: 1.06rem;
+        line-height: 1.9;
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        background: linear-gradient(135deg, rgba(217, 180, 107, 0.24), rgba(119, 180, 255, 0.16));
+      }
+
+      .person strong {
+        display: block;
+        font-size: 1rem;
+      }
+
+      .person span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .cta-shell {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+      }
+
+      .cta-main,
+      .cta-card {
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          radial-gradient(circle at 20% 24%, rgba(217, 180, 107, 0.16), transparent 24%),
+          radial-gradient(circle at 82% 28%, rgba(119, 180, 255, 0.14), transparent 24%),
+          linear-gradient(145deg, rgba(12, 16, 24, 0.96), rgba(8, 11, 17, 0.94));
+        box-shadow: var(--shadow-xl);
+      }
+
+      .cta-main {
+        padding: 42px;
+      }
+
+      .cta-main h2 {
+        margin: 18px 0 16px;
+        font-size: clamp(2.4rem, 4.2vw, 4.8rem);
+        line-height: 0.94;
+        max-width: 14ch;
+      }
+
+      .cta-main p {
+        margin: 0;
+        max-width: 60ch;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .cta-card {
+        padding: 26px;
+        display: grid;
+        align-content: end;
+        min-height: 100%;
+      }
+
+      .cta-card strong {
+        display: block;
+        margin-top: 20px;
+        font-size: 1.8rem;
+      }
+
+      .cta-card p {
+        margin: 12px 0 22px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .footer {
+        padding: 34px 0 54px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.9fr 0.8fr 0.8fr;
+        gap: 18px;
+        padding: 26px;
+        border-radius: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(11, 15, 22, 0.8);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .footer strong {
+        display: block;
+        margin-bottom: 14px;
+      }
+
+      .footer p,
+      .footer a {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .footer a:hover {
+        color: var(--text);
+      }
+
+      .footer-links,
+      .socials {
+        display: grid;
+        gap: 8px;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 16px;
+        color: rgba(231, 236, 244, 0.54);
+        font-size: 0.92rem;
+      }
+
+      [data-parallax] {
+        will-change: transform;
+      }
+
+      @keyframes drift {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+      }
+
+      @keyframes beam {
+        0% { transform: translateX(-120%) skewX(-18deg); }
+        100% { transform: translateX(220%) skewX(-18deg); }
+      }
+
+      .hero-tag,
+      .hero-angle {
+        animation: drift 8s ease-in-out infinite;
+      }
+
+      .hero-angle--b {
+        animation-duration: 10s;
+      }
+
+      .hero-stage::after {
+        content: "";
+        position: absolute;
+        top: -20%;
+        left: -25%;
+        width: 20%;
+        height: 160%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        animation: beam 9.5s linear infinite;
+        opacity: 0.18;
+      }
+
+      @media (max-width: 1180px) {
+        .hero-grid,
+        .manifesto,
+        .proof,
+        .cta-shell,
+        .section-header {
+          grid-template-columns: 1fr;
+        }
+
+        .cards-usp,
+        .process,
+        .testimonials {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .offers,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .proof-stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 920px) {
+        .header {
+          grid-template-columns: auto auto;
+        }
+
+        .nav,
+        .header-actions {
+          display: none;
+        }
+
+        .menu-btn {
+          display: inline-flex;
+        }
+
+        .mobile-menu {
+          display: grid;
+          gap: 14px;
+          margin-top: 14px;
+          padding: 18px;
+          border-radius: 28px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(8, 11, 17, 0.92);
+          backdrop-filter: blur(16px);
+          box-shadow: var(--shadow-lg);
+          opacity: 0;
+          transform: scaleY(0.92);
+          transform-origin: top;
+          pointer-events: none;
+          transition:
+            opacity 0.28s var(--ease),
+            transform 0.28s var(--ease);
+        }
+
+        .mobile-menu.is-open {
+          opacity: 1;
+          transform: scaleY(1);
+          pointer-events: auto;
+        }
+
+        .mobile-link {
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 14px 16px;
+          border-radius: 18px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.04);
+          color: var(--muted);
+        }
+
+        .mobile-link.is-active {
+          color: var(--text);
+          border-color: rgba(217, 180, 107, 0.24);
+        }
+
+        .mobile-actions {
+          display: grid;
+          gap: 12px;
+        }
+
+        .cards-usp,
+        .process,
+        .testimonials {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-stage {
+          min-height: 620px;
+        }
+
+        .structure {
+          inset: 56px 34px;
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(4, minmax(120px, auto));
+        }
+
+        .showcase-card:nth-child(1),
+        .showcase-card:nth-child(2),
+        .showcase-card:nth-child(3),
+        .showcase-card:nth-child(4),
+        .showcase-card:nth-child(5) {
+          grid-column: span 12;
+          min-height: 280px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        :root {
+          --container: calc(100vw - 20px);
+        }
+
+        .header {
+          padding: 12px 14px;
+          border-radius: 22px;
+        }
+
+        .hero {
+          padding: 54px 0 82px;
+          min-height: auto;
+        }
+
+        .hero-copy h1 {
+          font-size: clamp(2.7rem, 12vw, 4.6rem);
+        }
+
+        .hero-stage {
+          min-height: 520px;
+          border-radius: 34px;
+        }
+
+        .hero-gridlines {
+          inset: 24px;
+        }
+
+        .structure {
+          inset: 42px 22px;
+        }
+
+        .hero-tag {
+          max-width: calc(100% - 20px);
+        }
+
+        .hero-tag--one {
+          top: 18px;
+          right: 10px;
+        }
+
+        .hero-tag--two {
+          left: 10px;
+          bottom: 18px;
+        }
+
+        .manifesto-main,
+        .proof-main,
+        .cta-main,
+        .cta-card,
+        .footer-grid {
+          padding: 24px;
+        }
+
+        .manifesto-values,
+        .proof-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition-duration: 0.01ms !important;
+          transition-delay: 0ms !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header-wrap">
+      <div class="container">
+        <nav class="header" aria-label="Główna nawigacja">
+          <a class="logo" href="#home" aria-label="NOVA FENCE - strona główna">
+            <span class="logo-mark" aria-hidden="true"></span>
+            <span class="logo-copy">
+              <strong>NOVA FENCE</strong>
+              <span>Ogrodzenia / Bramy / Furtki</span>
+            </span>
+          </a>
+
+          <div class="nav">
+            <a class="is-active" href="#home">Strona główna</a>
+            <a href="#oferta">Oferta</a>
+            <a href="#realizacje">Realizacje</a>
+            <a href="#o-nas">O nas</a>
+            <a href="#kontakt">Kontakt</a>
+          </div>
+
+          <div class="header-actions">
+            <a class="phone" href="tel:+48123456789">+48 123 456 789</a>
+            <a class="btn btn-primary" href="#kontakt">Bezpłatna wycena</a>
+          </div>
+
+          <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </nav>
+
+        <div class="mobile-menu" id="mobileMenu">
+          <a class="mobile-link is-active" href="#home">Strona główna <span>01</span></a>
+          <a class="mobile-link" href="#oferta">Oferta <span>02</span></a>
+          <a class="mobile-link" href="#realizacje">Realizacje <span>03</span></a>
+          <a class="mobile-link" href="#o-nas">O nas <span>04</span></a>
+          <a class="mobile-link" href="#kontakt">Kontakt <span>05</span></a>
+          <div class="mobile-actions">
+            <a class="btn btn-primary" href="#kontakt">Bezpłatna wycena</a>
+            <a class="btn btn-ghost" href="tel:+48123456789">+48 123 456 789</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="hero-left">
+            <div class="hero-copy reveal">
+              <span class="eyebrow">Architectural showcase / premium industrial</span>
+              <h1>Nowoczesne ogrodzenia, bramy i furtki tworzone z precyzją</h1>
+              <p>
+                NOVA FENCE projektuje systemy ogrodzeniowe dla nowoczesnych domów i inwestycji komercyjnych.
+                Łączymy wyrazistą estetykę, własną produkcję i dopracowany detal, który pracuje z architekturą.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#oferta">Zobacz ofertę</a>
+                <a class="btn btn-ghost" href="#kontakt">Umów wycenę</a>
+              </div>
+            </div>
+
+            <div class="hero-strip reveal">
+              <article class="hero-metric">
+                <strong>12+ lat</strong>
+                <span>doświadczenia w realizacjach premium dla klientów prywatnych i biznesowych</span>
+              </article>
+              <article class="hero-metric">
+                <strong>1500+</strong>
+                <span>wykonanych ogrodzeń, bram i furtek w Polsce</span>
+              </article>
+              <article class="hero-metric">
+                <strong>98%</strong>
+                <span>zadowolonych klientów dzięki jakości i terminowości</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="hero-stage reveal" aria-hidden="true">
+            <div class="hero-gridlines"></div>
+            <div class="hero-angle hero-angle--a" data-parallax="0.04"></div>
+            <div class="hero-angle hero-angle--b" data-parallax="-0.03"></div>
+
+            <div class="structure">
+              <div class="structure-panel structure-panel--fence" data-parallax="0.02"></div>
+              <div class="structure-panel structure-panel--gate" data-parallax="-0.02"></div>
+              <div class="structure-panel structure-panel--entry" data-parallax="0.03"></div>
+              <div class="structure-panel structure-panel--copy" data-parallax="-0.01">
+                <span class="offer-label">System nowej generacji</span>
+                <strong>Forma, która porządkuje front inwestycji</strong>
+                <p>Od rytmu pionów po proporcje bramy i furtki. Każdy element podporządkowany jest spójnej kompozycji.</p>
+              </div>
+            </div>
+
+            <div class="hero-tag hero-tag--one" data-parallax="0.05">
+              <span class="hero-tag__dot">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                </svg>
+              </span>
+              <span>
+                <strong>Własna produkcja</strong>
+                <span>Kontrola jakości od projektu po montaż</span>
+              </span>
+            </div>
+
+            <div class="hero-tag hero-tag--two" data-parallax="-0.04">
+              <span class="hero-tag__dot">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="m4 13 4 4 12-12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <span>
+                <strong>Premium detail</strong>
+                <span>Nowoczesna estetyka dla prywatnych i firmowych inwestycji</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section divider" id="o-nas">
+        <div class="container manifesto">
+          <div class="manifesto-main reveal">
+            <span class="eyebrow">O marce</span>
+            <h2>Tworzymy systemy wejścia i ogrodzenia jak element współczesnej architektury.</h2>
+            <p>
+              Dla nas ogrodzenie nie jest dodatkiem. To pierwsza linia kontaktu z inwestycją, która buduje odbiór całej posesji.
+              Dlatego projektujemy rozwiązania wyraziste, precyzyjne i ponadczasowe, z naciskiem na jakość wykonania oraz komfort użytkowania.
+            </p>
+            <div class="manifesto-values">
+              <div class="manifesto-value">
+                <strong>Precyzja wykonania</strong>
+                <span>Dopracowane proporcje, powtarzalność modułów i świadomie budowany detal.</span>
+              </div>
+              <div class="manifesto-value">
+                <strong>Spójny design</strong>
+                <span>Brama, furtka i ogrodzenie projektowane jako jedna estetyczna kompozycja.</span>
+              </div>
+              <div class="manifesto-value">
+                <strong>Nowoczesne materiały</strong>
+                <span>Inspiracja stalą, aluminium i minimalizmem współczesnych realizacji premium.</span>
+              </div>
+              <div class="manifesto-value">
+                <strong>Realna funkcjonalność</strong>
+                <span>Komfort użytkowania, bezpieczeństwo i trwałość zamknięte w luksusowej formie.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="manifesto-side reveal">
+            <article class="side-card">
+              <div class="mini-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 19V6l8-3 8 3v13l-8 3-8-3Z" stroke="currentColor" stroke-width="1.6"></path>
+                </svg>
+              </div>
+              <strong>Własna produkcja</strong>
+              <p>Tworzymy rozwiązania od podstaw, dzięki czemu zachowujemy pełną kontrolę nad estetyką i jakością.</p>
+            </article>
+            <article class="side-card">
+              <div class="mini-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="m4 12 5 5 11-11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <strong>Montaż z odpowiedzialnością</strong>
+              <p>Nie kończymy na produkcji. Dbamy o właściwe osadzenie, ustawienie i finalny odbiór realizacji.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <span class="eyebrow">Przewagi</span>
+              <h2>Technologia, estetyka i trwałość w jednej marce.</h2>
+            </div>
+            <p>
+              Projektujemy i wykonujemy rozwiązania, które nie wyglądają jak katalogowy standard. Każdy system ma charakter,
+              klasę i odpowiednią skalę dla danej inwestycji.
+            </p>
+          </div>
+
+          <div class="cards-usp">
+            <article class="usp reveal">
+              <div class="mini-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 20h16M7 17V8m5 9V4m5 13v-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                </svg>
+              </div>
+              <h3>Własna produkcja</h3>
+              <p>Tworzymy ogrodzenia, bramy i furtki we własnym procesie, co pozwala dopracować każdy detal i utrzymać najwyższy standard realizacji.</p>
+            </article>
+            <article class="usp reveal">
+              <div class="mini-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3l7 4v5c0 4.2-2.6 7.8-7 9-4.4-1.2-7-4.8-7-9V7l7-4Z" stroke="currentColor" stroke-width="1.6"></path>
+                </svg>
+              </div>
+              <h3>Trwałość na lata</h3>
+              <p>Nasze systemy projektujemy z myślą o długotrwałej eksploatacji i wysokiej odporności na warunki atmosferyczne.</p>
+            </article>
+            <article class="usp reveal">
+              <div class="mini-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 18 12 4l8 14H4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <h3>Nowoczesny design</h3>
+              <p>Inspirujemy się architekturą premium, dlatego nasze realizacje są wyraziste, eleganckie i aktualne wizualnie.</p>
+            </article>
+            <article class="usp reveal">
+              <div class="mini-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 8h16M4 16h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                </svg>
+              </div>
+              <h3>Indywidualne projekty</h3>
+              <p>Każdy projekt dostosowujemy do charakteru elewacji, potrzeb inwestora i stylu całej przestrzeni wejściowej.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section divider" id="oferta">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <span class="eyebrow">Oferta</span>
+              <h2>Trzy filary nowoczesnego frontu inwestycji.</h2>
+            </div>
+            <p>
+              Oferujemy kompletne rozwiązania: od ogrodzeń przez bramy po furtki. Każda kategoria ma własny charakter,
+              ale wszystkie mogą tworzyć jedną, harmonijną całość.
+            </p>
+          </div>
+
+          <div class="offers">
+            <article class="offer offer--fence reveal" data-tilt>
+              <div class="offer-stage"></div>
+              <div>
+                <span class="offer-label">01 / Ogrodzenia</span>
+                <h3>Ogrodzenia premium</h3>
+                <p>Nowoczesne palisady i systemy frontowe o mocnym rytmie pionów, świetnej proporcji i estetyce dopasowanej do współczesnej architektury.</p>
+                <a class="offer-link" href="#kontakt">Dowiedz się więcej <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="offer offer--gate reveal" data-tilt>
+              <div class="offer-stage"></div>
+              <div>
+                <span class="offer-label">02 / Bramy</span>
+                <h3>Bramy przesuwne i skrzydłowe</h3>
+                <p>Rozwiązania projektowane z myślą o wygodzie, bezpieczeństwie i prestiżowym wyglądzie strefy wjazdowej w domu lub obiekcie firmowym.</p>
+                <a class="offer-link" href="#kontakt">Dowiedz się więcej <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="offer offer--wicket reveal" data-tilt>
+              <div class="offer-stage"></div>
+              <div>
+                <span class="offer-label">03 / Furtki</span>
+                <h3>Furtki i wejścia boczne</h3>
+                <p>Subtelne i precyzyjne wejścia, które dopełniają cały system i wzmacniają pierwsze wrażenie tuż po przekroczeniu linii posesji.</p>
+                <a class="offer-link" href="#kontakt">Dowiedz się więcej <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container proof">
+          <div class="proof-main reveal">
+            <span class="eyebrow">Dlaczego my</span>
+            <h2>Od koncepcji do montażu prowadzimy inwestycję w jednym standardzie jakości.</h2>
+            <p>
+              NOVA FENCE to połączenie doradztwa, projektu, produkcji i montażu. Dzięki temu inwestor otrzymuje jeden spójny proces,
+              bez chaosu, przypadkowych decyzji i niespójnych elementów.
+            </p>
+            <div class="proof-list">
+              <div class="proof-item">
+                <div class="proof-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 18 10 6l4 8 2-4 4 8H4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Projekt i doradztwo</strong>
+                  <span>Dobieramy styl, podziały i rozwiązania techniczne do charakteru inwestycji.</span>
+                </div>
+              </div>
+              <div class="proof-item">
+                <div class="proof-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 8h16M7 4h10v16H7z" stroke="currentColor" stroke-width="1.6"></path>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Produkcja</strong>
+                  <span>Dbamy o jakość wykonania, powtarzalność detalu i wysoką estetykę finalnego produktu.</span>
+                </div>
+              </div>
+              <div class="proof-item">
+                <div class="proof-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="m4 12 5 5 11-11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Montaż i wsparcie</strong>
+                  <span>Kończymy realizację dopiero wtedy, gdy system działa i wygląda dokładnie tak, jak powinien.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="proof-stats reveal">
+            <article class="stat">
+              <span class="offer-label">Doświadczenie</span>
+              <strong>12+ lat</strong>
+              <span>realizacji dla domów prywatnych, osiedli i inwestycji komercyjnych</span>
+            </article>
+            <article class="stat">
+              <span class="offer-label">Skala</span>
+              <strong>1500+</strong>
+              <span>zrealizowanych ogrodzeń, bram i furtek w różnych typach inwestycji</span>
+            </article>
+            <article class="stat stat--wide">
+              <span class="offer-label">Satysfakcja klientów</span>
+              <strong>98%</strong>
+              <span>pozytywnych opinii dzięki jakości wykonania, komunikacji i końcowemu efektowi wizualnemu</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section divider" id="realizacje">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <span class="eyebrow">Realizacje</span>
+              <h2>Estetyka, która wygląda jak część projektu architektonicznego.</h2>
+            </div>
+            <p>
+              Placeholdery mają tu charakter premium i pokazują sposób myślenia o kompozycji, podziale modułów oraz relacji między ogrodzeniem a bryłą budynku.
+            </p>
+          </div>
+
+          <div class="showcase">
+            <article class="showcase-card showcase-card--01 reveal">
+              <div class="showcase-art"></div>
+              <div class="showcase-meta">
+                <span class="city-pill">Warszawa</span>
+                <strong>Ogrodzenie aluminiowe</strong>
+                <span>Rytmiczny układ profili i spokojna, nowoczesna linia frontu posesji.</span>
+              </div>
+            </article>
+            <article class="showcase-card showcase-card--02 reveal">
+              <div class="showcase-art"></div>
+              <div class="showcase-meta">
+                <span class="city-pill">Wrocław</span>
+                <strong>Brama przesuwna</strong>
+                <span>Wyrazisty podział strefy wjazdowej z czytelną geometrią i eleganckim detalem.</span>
+              </div>
+            </article>
+            <article class="showcase-card showcase-card--03 reveal">
+              <div class="showcase-art"></div>
+              <div class="showcase-meta">
+                <span class="city-pill">Kraków</span>
+                <strong>Furtka nowoczesna</strong>
+                <span>Subtelny moduł wejściowy dopasowany do architektury i elewacji budynku.</span>
+              </div>
+            </article>
+            <article class="showcase-card showcase-card--04 reveal">
+              <div class="showcase-art"></div>
+              <div class="showcase-meta">
+                <span class="city-pill">Poznań</span>
+                <strong>System dla firmy</strong>
+                <span>Reprezentacyjne ogrodzenie o większej skali dla inwestycji komercyjnej.</span>
+              </div>
+            </article>
+            <article class="showcase-card showcase-card--05 reveal">
+              <div class="showcase-art"></div>
+              <div class="showcase-meta">
+                <span class="city-pill">Gdańsk</span>
+                <strong>Strefa wejścia premium</strong>
+                <span>Połączenie bramy, furtki i ogrodzenia w jednej, spójnej kompozycji.</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <span class="eyebrow">Proces współpracy</span>
+              <h2>Współpraca zaplanowana jasno, etap po etapie.</h2>
+            </div>
+            <p>
+              Klient ma pełną świadomość, co dzieje się na każdym etapie inwestycji. To pozwala podejmować dobre decyzje i utrzymać jakość końcowego efektu.
+            </p>
+          </div>
+
+          <div class="process">
+            <article class="step reveal">
+              <span class="step-pill">Etap 01</span>
+              <div class="step-number">01</div>
+              <h3>Kontakt</h3>
+              <p>Rozpoznajemy potrzeby inwestora, styl projektu i oczekiwania funkcjonalne.</p>
+            </article>
+            <article class="step reveal">
+              <span class="step-pill">Etap 02</span>
+              <div class="step-number">02</div>
+              <h3>Pomiar i projekt</h3>
+              <p>Przygotowujemy założenia wizualne i techniczne dopasowane do konkretnej inwestycji.</p>
+            </article>
+            <article class="step reveal">
+              <span class="step-pill">Etap 03</span>
+              <div class="step-number">03</div>
+              <h3>Produkcja</h3>
+              <p>Realizujemy projekt z naciskiem na trwałość, estetykę i powtarzalność wykonania.</p>
+            </article>
+            <article class="step reveal">
+              <span class="step-pill">Etap 04</span>
+              <div class="step-number">04</div>
+              <h3>Montaż</h3>
+              <p>Finalizujemy inwestycję profesjonalnym montażem, regulacją i odbiorem końcowym.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section divider">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <span class="eyebrow">Opinie klientów</span>
+              <h2>Efekt końcowy i jakość współpracy budują zaufanie do marki.</h2>
+            </div>
+            <p>
+              Klienci doceniają nie tylko sam produkt, ale też klarowny proces, terminowość i poziom estetycznego dopracowania całej realizacji.
+            </p>
+          </div>
+
+          <div class="testimonials">
+            <article class="testimonial reveal">
+              <span class="quote-pill">Klient indywidualny</span>
+              <blockquote>
+                „Ogrodzenie wygląda jak integralna część architektury domu. To nie jest standardowy produkt, tylko naprawdę dopracowana realizacja premium.”
+              </blockquote>
+              <div class="person">
+                <div class="avatar" aria-hidden="true">AK</div>
+                <div>
+                  <strong>Anna K.</strong>
+                  <span>Warszawa, dom jednorodzinny</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial reveal">
+              <span class="quote-pill">Realizacja premium</span>
+              <blockquote>
+                „Świetne doradztwo, wysoka kultura współpracy i bardzo mocny efekt wizualny. Brama oraz furtka wyglądają dokładnie tak, jak chcieliśmy.”
+              </blockquote>
+              <div class="person">
+                <div class="avatar" aria-hidden="true">MP</div>
+                <div>
+                  <strong>Michał P.</strong>
+                  <span>Wrocław, nowoczesna inwestycja</span>
+                </div>
+              </div>
+            </article>
+            <article class="testimonial reveal">
+              <span class="quote-pill">Klient biznesowy</span>
+              <blockquote>
+                „Całość bardzo dobrze wpisała się w wizerunek naszej firmy. Doceniamy jakość montażu, komunikację i końcowy poziom wykonania.”
+              </blockquote>
+              <div class="person">
+                <div class="avatar" aria-hidden="true">TB</div>
+                <div>
+                  <strong>Tomasz B.</strong>
+                  <span>Poznań, inwestycja firmowa</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="kontakt">
+        <div class="container cta-shell">
+          <div class="cta-main reveal">
+            <span class="eyebrow">Końcowe CTA</span>
+            <h2>Stwórzmy ogrodzenie, które podkreśli charakter Twojej inwestycji</h2>
+            <p>
+              Jeśli zależy Ci na projekcie, który łączy estetykę premium, trwałe wykonanie i spójną kompozycję całej strefy wejściowej,
+              skontaktuj się z nami. Przygotujemy bezpłatną wycenę i zaproponujemy najlepszy kierunek realizacji.
+            </p>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="mailto:kontakt@novafence.pl">Poproś o bezpłatną wycenę</a>
+              <a class="btn btn-ghost" href="tel:+48123456789">Zadzwoń do nas</a>
+            </div>
+          </div>
+
+          <aside class="cta-card reveal">
+            <span class="offer-label">Kontakt</span>
+            <strong>Bezpłatna konsultacja i wycena</strong>
+            <p>Odpowiadamy szybko, jasno określamy zakres inwestycji i pomagamy dobrać rozwiązanie do architektury obiektu.</p>
+            <a class="btn btn-primary" href="mailto:kontakt@novafence.pl">kontakt@novafence.pl</a>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <strong>NOVA FENCE</strong>
+            <p>
+              Producent ogrodzeń, bram i furtek klasy premium dla inwestycji prywatnych i komercyjnych.
+              Nowoczesna forma, własna produkcja i odpowiedzialny montaż.
+            </p>
+          </div>
+          <div>
+            <strong>Kontakt</strong>
+            <p>+48 123 456 789</p>
+            <p>kontakt@novafence.pl</p>
+            <p>ul. Przemysłowa 18<br />00-000 Warszawa</p>
+          </div>
+          <div>
+            <strong>Nawigacja</strong>
+            <div class="footer-links">
+              <a href="#oferta">Oferta</a>
+              <a href="#realizacje">Realizacje</a>
+              <a href="#o-nas">O nas</a>
+              <a href="#kontakt">Kontakt</a>
+            </div>
+          </div>
+          <div>
+            <strong>Social</strong>
+            <div class="socials">
+              <a href="#">Instagram</a>
+              <a href="#">Facebook</a>
+              <a href="#">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 NOVA FENCE. Wszelkie prawa zastrzeżone.</span>
+          <span>Premium systems for modern architecture.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const body = document.body;
+        const header = document.querySelector(".header");
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        const desktopLinks = [...document.querySelectorAll(".nav a")];
+        const mobileLinks = [...document.querySelectorAll(".mobile-link")];
+        const sections = [...document.querySelectorAll("main section[id]")];
+        const revealElements = [...document.querySelectorAll(".reveal")];
+        const tiltCards = [...document.querySelectorAll("[data-tilt]")];
+        const parallaxItems = [...document.querySelectorAll("[data-parallax]")];
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const setHeaderState = () => {
+          header?.classList.toggle("is-scrolled", window.scrollY > 24);
+        };
+
+        const updateActiveNav = () => {
+          const position = window.scrollY + window.innerHeight * 0.24;
+          let current = sections[0]?.id || "home";
+
+          sections.forEach((section) => {
+            if (position >= section.offsetTop) current = section.id;
+          });
+
+          desktopLinks.forEach((link) => {
+            link.classList.toggle("is-active", link.getAttribute("href") === `#${current}`);
+          });
+
+          mobileLinks.forEach((link) => {
+            link.classList.toggle("is-active", link.getAttribute("href") === `#${current}`);
+          });
+        };
+
+        const closeMenu = () => {
+          if (!menuBtn || !mobileMenu) return;
+          menuBtn.classList.remove("is-open");
+          menuBtn.setAttribute("aria-expanded", "false");
+          mobileMenu.classList.remove("is-open");
+          body.style.overflow = "";
+        };
+
+        const openMenu = () => {
+          if (!menuBtn || !mobileMenu) return;
+          menuBtn.classList.add("is-open");
+          menuBtn.setAttribute("aria-expanded", "true");
+          mobileMenu.classList.add("is-open");
+          body.style.overflow = "hidden";
+        };
+
+        if (menuBtn && mobileMenu) {
+          menuBtn.addEventListener("click", () => {
+            const opened = menuBtn.classList.contains("is-open");
+            if (opened) closeMenu();
+            else openMenu();
+          });
+
+          [...mobileLinks, ...mobileMenu.querySelectorAll(".btn")].forEach((link) => {
+            link.addEventListener("click", closeMenu);
+          });
+        }
+
+        setHeaderState();
+        updateActiveNav();
+        window.addEventListener("scroll", setHeaderState, { passive: true });
+        window.addEventListener("scroll", updateActiveNav, { passive: true });
+
+        if (!reduced && "IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries, obs) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+          );
+
+          revealElements.forEach((el) => observer.observe(el));
+        } else {
+          revealElements.forEach((el) => el.classList.add("is-visible"));
+        }
+
+        if (!reduced && parallaxItems.length) {
+          let ticking = false;
+
+          const applyParallax = () => {
+            const y = window.scrollY;
+            parallaxItems.forEach((item) => {
+              const speed = Number(item.getAttribute("data-parallax")) || 0;
+              item.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+            });
+            ticking = false;
+          };
+
+          const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(applyParallax);
+          };
+
+          applyParallax();
+          window.addEventListener("scroll", onScroll, { passive: true });
+        }
+
+        if (!reduced) {
+          tiltCards.forEach((card) => {
+            const reset = () => {
+              card.style.transform = "";
+            };
+
+            card.addEventListener("pointermove", (event) => {
+              const rect = card.getBoundingClientRect();
+              const px = (event.clientX - rect.left) / rect.width;
+              const py = (event.clientY - rect.top) / rect.height;
+              const rotateY = (px - 0.5) * 8;
+              const rotateX = (0.5 - py) * 8;
+              card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            });
+
+            card.addEventListener("pointerleave", reset);
+            card.addEventListener("blur", reset, true);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

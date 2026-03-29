@@ -21,8 +21,6 @@ export default function ShowcaseCarousel({ items }: ShowcaseCarouselProps) {
   const total = items.length;
   const safeIndex = useMemo(() => (total === 0 ? 0 : (index + total) % total), [index, total]);
 
-  if (total === 0) return null;
-
   const prev = () => setIndex((prevIndex) => (prevIndex - 1 + total) % total);
   const next = () => setIndex((prevIndex) => (prevIndex + 1) % total);
 
@@ -33,6 +31,8 @@ export default function ShowcaseCarousel({ items }: ShowcaseCarouselProps) {
     }, 5000);
     return () => window.clearInterval(timer);
   }, [paused, total]);
+
+  if (total === 0) return null;
 
   return (
     <div
