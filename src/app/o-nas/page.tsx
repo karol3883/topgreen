@@ -13,7 +13,7 @@ export default function ONasPage() {
           <div className="mx-auto w-[min(1140px,92vw)]">
             <div>
               <p className="mb-3 text-[11px] uppercase tracking-[0.4em] text-tg-muted">O nas</p>
-              <h1 className="font-serif text-4xl md:text-5xl">TopGreen — stal w służbie architektury</h1>
+              <h1 className="font-serif text-2xl md:text-3xl">TopGreen — stal w służbie architektury</h1>
               <p className="mt-4 text-lg text-tg-muted">
                 Łączymy inżynierską precyzję z estetyką nowoczesnych brył. Projektujemy ogrodzenia, które
                 podkreślają charakter domu i porządkują przestrzeń.

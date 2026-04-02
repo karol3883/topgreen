@@ -21,7 +21,7 @@ export default function BramaSkrzydlowaPage() {
           <div className="mx-auto grid w-[min(1140px,92vw)] gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div>
               <p className="mb-3 text-[11px] uppercase tracking-[0.4em] text-tg-muted">Oferta</p>
-              <h1 className="font-serif text-4xl md:text-5xl">Brama skrzydłowa</h1>
+              <h1 className="font-serif text-2xl md:text-3xl">Brama skrzydłowa</h1>
               <p className="mt-4 text-lg text-tg-muted">
                 Klasyczny styl w nowoczesnym wykonaniu. Spójna linia profili, wysoka trwałość i
                 opcjonalna automatyka.

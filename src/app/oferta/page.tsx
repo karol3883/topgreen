@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function OfertaPage() {
   return (
@@ -18,7 +19,7 @@ export default function OfertaPage() {
             </div>
             <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
               <div>
-                <h1 className="font-serif text-4xl text-tg-secondary md:text-5xl">Wybierz system, resztę bierzemy na siebie.</h1>
+                <h1 className="font-serif text-2xl text-tg-secondary md:text-3xl">Wybierz system, resztę bierzemy na siebie.</h1>
                 <p className="mt-4 max-w-2xl text-lg text-tg-muted">
                   Od palisad po automatykę — konfigurujemy rozwiązania pod Twój styl domu i budżet.
                   Zobacz kategorie, wybierz wariant, a my przygotujemy wycenę i harmonogram.
@@ -30,12 +31,12 @@ export default function OfertaPage() {
                   >
                     Zamów wycenę
                   </a>
-                  <a
+                  <Link
                     className="rounded-full border border-tg-line bg-tg-dark px-6 py-3 text-sm font-semibold text-tg-secondary"
                     href="/realizacje"
                   >
                     Zobacz realizacje
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">

@@ -105,7 +105,7 @@ export default function RealizacjePage() {
           <div className="absolute inset-x-0 bottom-0 -z-10 h-20 bg-gradient-to-b from-transparent to-[color:var(--color-tg-alt)]"></div>
           <div className="mx-auto w-[min(1140px,92vw)]">
             <p className="mb-3 text-[11px] uppercase tracking-[0.4em] text-tg-muted">Realizacje</p>
-            <h1 className="font-serif text-4xl md:text-5xl">Galeria realizacji TopGreen</h1>
+            <h1 className="font-serif text-2xl md:text-3xl">Galeria realizacji TopGreen</h1>
             <p className="mt-4 max-w-2xl text-lg text-tg-muted">
               Przykładowe realizacje z podziałem na kategorie. Docelowe zdjęcia podmienimy po akceptacji
               materiałów.
