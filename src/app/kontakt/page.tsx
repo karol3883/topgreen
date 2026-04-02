@@ -153,7 +153,6 @@ export default function KontaktPage() {
       <SiteHeader
         navItems={[
           { href: "/", label: "Strona główna" },
-          { href: "/oferta", label: "Oferta" },
           { href: "/galeria", label: "Galeria" },
           { href: "/kontakt", label: "Kontakt" },
         ]}
