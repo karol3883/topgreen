@@ -31,6 +31,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: docker/Dockerfile.prod
+          file: docker/Dockerfile
           tags: ${{ env.IMAGE_NAME }}
           push: ${{ github.event_name == 'push' }}
