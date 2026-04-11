@@ -7,7 +7,7 @@ import SiteHeader from "@/components/SiteHeader";
 
 const navItems = [
   { href: "#home", label: "Strona główna" },
-  { href: "/galeria", label: "Galeria v2" },
+  { href: "/galeria", label: "Galeria v3" },
   { href: "#o-nas", label: "O nas" },
   { href: "/kontakt", label: "Kontakt" },
 ];
