@@ -8,7 +8,9 @@ on:
 
 permissions:
   contents: read
-  packages: write
+
+env:
+  IMAGE_NAME: karol3883/topgreen
 
 jobs:
   build:
@@ -25,20 +27,19 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=branch
             type=ref,event=pr
             type=sha
 
-      - name: Log in to GHCR
+      - name: Log in to Docker Hub
         if: github.event_name == 'push'
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_LOGIN }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build (and push on push)
         uses: docker/build-push-action@v6
@@ -50,8 +51,15 @@ jobs:
           push: ${{ github.event_name == 'push' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Sample test
-        run: echo 1234;
+
+      - name: Trigger Mikrus deploy
+        if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
+        env:
+          MIKRUS_SRV: ${{ secrets.MIKRUS_SRV }}
+          MIKRUS_KEY: ${{ secrets.MIKRUS_API_KEY }}
+        run: |
+          curl -fsS \
+            --data-urlencode "srv=${MIKRUS_SRV}" \
+            --data-urlencode "key=${MIKRUS_KEY}" \
+            --data-urlencode "cmd=cd /opt/mikrus && docker compose pull topgreen && docker compose up -d topgreen" \
+            https://api.mikr.us/exec
