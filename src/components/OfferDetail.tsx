@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type OfferImage = {
   src: string;
@@ -25,6 +25,36 @@ export default function OfferDetail({ page }: OfferDetailProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const node = contentRef.current;
+
+    if (!node) return;
+
+    if (!reduced && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            setIsVisible(true);
+            obs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      observer.observe(node);
+
+      return () => {
+        observer.disconnect();
+      };
+    } else {
+      setIsVisible(true);
+    }
+  }, []);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -42,11 +72,11 @@ export default function OfferDetail({ page }: OfferDetailProps) {
 
   return (
     <>
-      <section className="section realization-feature-section">
+      <section ref={contentRef} className="section realization-feature-section">
         <div className="container">
           <button
             type="button"
-            className={`realization-stage reveal is-visible${isTransitioning ? " is-transitioning" : ""}`}
+            className={`realization-stage reveal${isVisible ? " is-visible" : ""}${isTransitioning ? " is-transitioning" : ""}`}
             onClick={() => setLightboxIndex(activeIndex)}
             aria-label={`Powieksz zdjecie oferty ${page.title}`}
           >
@@ -61,7 +91,7 @@ export default function OfferDetail({ page }: OfferDetailProps) {
             </div>
           </button>
 
-          <article className="realization-summary luxury-panel reveal is-visible">
+          <article className={`realization-summary luxury-panel reveal${isVisible ? " is-visible" : ""}`}>
             <span className="eyebrow">Opis oferty</span>
             <h2>{page.title}</h2>
             <p>{page.description}</p>
@@ -80,7 +110,7 @@ export default function OfferDetail({ page }: OfferDetailProps) {
 
       <section className="gallery-section realization-gallery-section" id="projekty">
         <div className="container">
-          <div className="section-head reveal is-visible">
+          <div className={`section-head reveal${isVisible ? " is-visible" : ""}`}>
             <div>
               <span className="eyebrow">Galeria oferty</span>
               <h2>Przykladowe ujecia dla uslugi {page.offer}.</h2>
@@ -92,7 +122,7 @@ export default function OfferDetail({ page }: OfferDetailProps) {
             {page.gallery.map((image, index) => (
               <article
                 key={`${image.src}-${index}`}
-                className={`gallery-card reveal is-visible${index === activeIndex ? " is-current" : ""}`}
+                className={`gallery-card reveal${isVisible ? " is-visible" : ""}${index === activeIndex ? " is-current" : ""}`}
               >
                 <button
                   type="button"

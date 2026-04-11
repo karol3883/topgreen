@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type PageHeroProps = {
   eyebrow: string;
@@ -21,12 +24,41 @@ export default function PageHero({
   titleId,
   className,
 }: PageHeroProps) {
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const sectionClassName = ["hero", "page-hero", className].filter(Boolean).join(" ");
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const node = heroRef.current;
+
+    if (!node) return;
+
+    if (reduced || !("IntersectionObserver" in window)) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          setIsVisible(true);
+          obs.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className={sectionClassName} id={id} aria-labelledby={titleId}>
       <div className="container hero-shell">
-        <div className="hero-core reveal is-visible">
+        <div ref={heroRef} className={`hero-core reveal${isVisible ? " is-visible" : ""}`}>
           <div className="hero-copy page-hero-copy">
             <span className="eyebrow">{eyebrow}</span>
             <h1 id={titleId}>{title}</h1>

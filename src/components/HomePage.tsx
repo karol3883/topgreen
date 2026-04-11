@@ -2,17 +2,8 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
-import { offerNavItem } from "@/components/site-nav";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-
-const navItems = [
-  { href: "#home", label: "Strona główna" },
-  offerNavItem,
-  { href: "/galeria", label: "Galeria" },
-  // { href: "#o-nas", label: "O nas" },
-  { href: "/kontakt", label: "Kontakt" },
-];
 
 const homeSectionIds = ["home", "o-nas", "oferta", "kontakt"];
 
@@ -231,7 +222,7 @@ export default function HomePage() {
 
   return (
     <>
-      <SiteHeader navItems={navItems} sectionIds={homeSectionIds} brandHref="#home" />
+      <SiteHeader sectionIds={homeSectionIds} brandHref="#home" />
 
       <main>
         <section className="hero" id="home" aria-labelledby="hero-title">

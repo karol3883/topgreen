@@ -4,7 +4,6 @@ import { FormEvent, useEffect, useState } from "react";
 import PageHero from "@/components/PageHero";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { offerNavItem } from "@/components/site-nav";
 
 const contactItems = [
   {
@@ -152,15 +151,7 @@ export default function KontaktPage() {
 
   return (
     <>
-      <SiteHeader
-        navItems={[
-          { href: "/", label: "Strona główna" },
-          offerNavItem,
-          { href: "/galeria", label: "Galeria" },
-          { href: "/kontakt", label: "Kontakt" },
-        ]}
-        activeHref="/kontakt"
-      />
+      <SiteHeader activeHref="/kontakt" />
 
       <main>
         <PageHero
@@ -264,6 +255,27 @@ export default function KontaktPage() {
                   {formState.message}
                 </div>
               </form>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <div className="contact-map-card reveal">
+              <div className="contact-map-art">
+                <iframe
+                  title="Mapa Google - Przysucha"
+                  src="https://www.google.com/maps?q=Przysucha%2C%20Polska&z=13&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
+              <div className="contact-map-meta">
+                <span className="eyebrow">Lokalizacja</span>
+                <strong>Przysucha</strong>
+                <span>Na ten moment ustawiona jako lokalizacja referencyjna dla sekcji mapy.</span>
+              </div>
             </div>
           </div>
         </section>

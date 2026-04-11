@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from "react";
 import PageHero from "@/components/PageHero";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { offerNavItem } from "@/components/site-nav";
 
 type GalleryCategory = "bramy-przesuwne" | "bramy-skrzydlowe" | "ogrodzenia-3d";
 
@@ -77,10 +76,10 @@ const galleryItems: GalleryItem[] = [
 ];
 
 const categoryFilters = [
-  { value: "all", label: "Wszystkie" },
-  { value: "bramy-przesuwne", label: "Bramy przesuwne" },
-  { value: "bramy-skrzydlowe", label: "Bramy skrzydłowe" },
-  { value: "ogrodzenia-3d", label: "Ogrodzenia 3D" },
+  { value: "all", label: "Wszystkie", hint: "Pelny przekroj realizacji" },
+  { value: "bramy-przesuwne", label: "Bramy przesuwne", hint: "Nowoczesne strefy wjazdu" },
+  { value: "bramy-skrzydlowe", label: "Bramy skrzydłowe", hint: "Klasyczny uklad premium" },
+  { value: "ogrodzenia-3d", label: "Ogrodzenia 3D", hint: "Systemy lekkie i uzytkowe" },
 ] as const;
 
 export default function GalleryPage() {
@@ -122,15 +121,7 @@ export default function GalleryPage() {
 
   return (
     <>
-      <SiteHeader
-        navItems={[
-          { href: "/", label: "Strona główna" },
-          offerNavItem,
-          { href: "/galeria", label: "Galeria" },
-          { href: "/kontakt", label: "Kontakt" },
-        ]}
-        activeHref="/galeria"
-      />
+      <SiteHeader activeHref="/galeria" />
 
       <main>
         <PageHero
@@ -144,8 +135,11 @@ export default function GalleryPage() {
         <section className="gallery-section">
           <div className="container">
             <div className="filters-wrap gallery-filters reveal" aria-label="Filtry galerii">
-              <div className="filter-group" role="group" aria-label="Kategorie">
+              <div className="filter-head">
                 <span className="filter-label">Kategorie</span>
+                <p>Wybierz typ realizacji i zawęź galerię do jednego kierunku estetycznego.</p>
+              </div>
+              <div className="filter-group" role="group" aria-label="Kategorie">
                 {categoryFilters.map((filter) => (
                   <button
                     key={filter.value}
@@ -153,7 +147,8 @@ export default function GalleryPage() {
                     type="button"
                     onClick={() => setActiveCategory(filter.value)}
                   >
-                    {filter.label}
+                    <span className="chip-title">{filter.label}</span>
+                    <span className="chip-hint">{filter.hint}</span>
                   </button>
                 ))}
               </div>

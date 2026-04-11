@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
+import { siteNavItems } from "@/components/site-nav";
 
 type NavItem = {
   href: string;
@@ -11,17 +12,18 @@ type NavItem = {
 };
 
 type SiteHeaderProps = {
-  navItems: NavItem[];
   activeHref?: string;
   sectionIds?: string[];
   brandHref?: string;
 };
 
-export default function SiteHeader({ navItems, activeHref, sectionIds, brandHref }: SiteHeaderProps) {
+export default function SiteHeader({ activeHref, sectionIds, brandHref }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openMobileItem, setOpenMobileItem] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState(sectionIds?.[0] ?? "");
   const menuId = useId();
+  const navItems: NavItem[] = siteNavItems;
 
   useEffect(() => {
     const syncHeader = () => {
@@ -66,6 +68,7 @@ export default function SiteHeader({ navItems, activeHref, sectionIds, brandHref
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setOpenMobileItem(null);
     document.body.style.overflow = "";
   };
 
@@ -171,12 +174,29 @@ export default function SiteHeader({ navItems, activeHref, sectionIds, brandHref
 
             return (
               <div key={item.href} className="mobile-group">
-                {item.href.startsWith("#") ? (
-                  <a
-                    className={`mobile-link${itemIsActive ? " is-active" : ""}`}
-                    href={item.href}
-                    onClick={closeMenu}
+                {item.children?.length ? (
+                  <button
+                    type="button"
+                    className={`mobile-link mobile-link-toggle${itemIsActive ? " is-active" : ""}${
+                      openMobileItem === item.href ? " is-open" : ""
+                    }`}
+                    aria-expanded={openMobileItem === item.href}
+                    onClick={() => setOpenMobileItem((current) => (current === item.href ? null : item.href))}
                   >
+                    <span>{item.label}</span>
+                    <svg viewBox="0 0 20 20" className="mobile-link-icon" aria-hidden="true">
+                      <path
+                        d="M5 7l5 5 5-5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                ) : item.href.startsWith("#") ? (
+                  <a className={`mobile-link${itemIsActive ? " is-active" : ""}`} href={item.href} onClick={closeMenu}>
                     {item.label}
                   </a>
                 ) : (
@@ -189,7 +209,7 @@ export default function SiteHeader({ navItems, activeHref, sectionIds, brandHref
                   </Link>
                 )}
                 {item.children?.length ? (
-                  <div className="mobile-submenu">
+                  <div className={`mobile-submenu${openMobileItem === item.href ? " is-open" : ""}`}>
                     {item.children.map((child) => (
                       <Link
                         key={child.href}

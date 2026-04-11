@@ -451,7 +451,7 @@ svg {
 
 .hero-copy.page-hero-copy h1,
 .hero-copy.gallery-hero-copy h1 {
-  max-width: 14ch;
+  max-width: 18ch;
   font-size: clamp(2.6rem, 4.4vw, 3.8rem);
   line-height: 1.08;
   margin: 0;
@@ -478,20 +478,33 @@ svg {
 .gallery-filters {
   margin-top: 0;
   margin-bottom: 24px;
-  padding: 20px 22px;
-  border-radius: 26px;
+  padding: 24px;
+  border-radius: 32px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
-    rgba(11, 15, 22, 0.72);
+    radial-gradient(circle at top right, rgba(217, 180, 107, 0.12), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+    rgba(11, 15, 22, 0.76);
   box-shadow: var(--shadow-lg);
 }
 
+.filter-head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.filter-head p {
+  margin: 0;
+  max-width: 56ch;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .filter-group {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  align-items: center;
 }
 
 .filter-label {
@@ -502,28 +515,53 @@ svg {
 }
 
 .chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 18px;
-  border-radius: 999px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-height: 98px;
+  padding: 16px 18px;
+  text-align: left;
+  border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+    rgba(255, 255, 255, 0.02);
   color: var(--muted);
   transition:
     color 0.25s var(--ease),
     background 0.25s var(--ease),
     border-color 0.25s var(--ease),
-    transform 0.25s var(--ease);
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.chip-title {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.chip-hint {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
 }
 
 .chip:hover,
 .chip.is-active {
   color: var(--text);
-  border-color: rgba(217, 180, 107, 0.28);
-  background: rgba(255, 255, 255, 0.07);
-  transform: translateY(-2px);
+  border-color: rgba(217, 180, 107, 0.34);
+  background:
+    linear-gradient(180deg, rgba(217, 180, 107, 0.12), rgba(255, 255, 255, 0.03)),
+    rgba(255, 255, 255, 0.05);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 38px rgba(0, 0, 0, 0.18);
+}
+
+.chip.is-active .chip-hint,
+.chip:hover .chip-hint {
+  color: rgba(231, 236, 244, 0.82);
 }
 
 .gallery-section {
@@ -718,6 +756,17 @@ svg {
   background: rgba(5, 8, 13, 0.58);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(14px);
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.28s var(--ease),
+    transform 0.28s var(--ease);
+}
+
+.gallery-card:hover .gallery-meta,
+.gallery-card:focus-within .gallery-meta {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .badges {
@@ -1068,6 +1117,14 @@ svg {
     radial-gradient(circle at 62% 44%, rgba(217, 180, 107, 0.22), transparent 16%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
     rgba(14, 18, 26, 0.88);
+}
+
+.contact-map-art iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .contact-map-art::before,
@@ -1927,12 +1984,13 @@ svg {
 
   .mobile-group {
     display: grid;
-    gap: 10px;
+    gap: 0;
   }
 
   .mobile-link {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 16px;
     padding: 14px 16px;
     border-radius: 18px;
@@ -1941,10 +1999,43 @@ svg {
     color: var(--muted);
   }
 
+  .mobile-link-toggle {
+    width: 100%;
+    text-align: left;
+  }
+
+  .mobile-link-icon {
+    width: 16px;
+    height: 16px;
+    color: rgba(217, 180, 107, 0.88);
+    transition: transform 0.24s var(--ease);
+  }
+
+  .mobile-link-toggle.is-open .mobile-link-icon {
+    transform: rotate(180deg);
+  }
+
   .mobile-submenu {
     display: grid;
     gap: 8px;
     padding-left: 14px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition:
+      max-height 0.28s var(--ease),
+      opacity 0.22s var(--ease),
+      transform 0.22s var(--ease);
+  }
+
+  .mobile-submenu.is-open {
+    max-height: 240px;
+    margin-top: 10px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .mobile-sublink {
@@ -1969,6 +2060,10 @@ svg {
   .mobile-actions {
     display: grid;
     gap: 12px;
+  }
+
+  .filter-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .usp-grid,
@@ -2047,6 +2142,15 @@ svg {
 
   .gallery-card {
     grid-column: span 12;
+  }
+
+  .filter-group {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-meta {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .realization-stage,

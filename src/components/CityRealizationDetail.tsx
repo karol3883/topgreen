@@ -27,6 +27,34 @@ export default function CityRealizationDetail({ page }: CityRealizationDetailPro
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+
+    let observer: IntersectionObserver | null = null;
+
+    if (!reduced && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      revealItems.forEach((item) => observer?.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+
+    return () => {
+      observer?.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % page.gallery.length);
     }, 4500);
@@ -42,7 +70,7 @@ export default function CityRealizationDetail({ page }: CityRealizationDetailPro
         <div className="container realization-feature-grid">
           <button
             type="button"
-            className="realization-stage reveal is-visible"
+            className="realization-stage reveal"
             onClick={() => setLightboxIndex(activeIndex)}
             aria-label={`Powieksz zdjecie realizacji ${page.title}`}
           >
@@ -57,7 +85,7 @@ export default function CityRealizationDetail({ page }: CityRealizationDetailPro
             </div>
           </button>
 
-          <article className="realization-summary luxury-panel reveal is-visible">
+          <article className="realization-summary luxury-panel reveal">
             <span className="eyebrow">Opis realizacji</span>
             <h2>{page.title}</h2>
             <p>{page.description}</p>
@@ -76,7 +104,7 @@ export default function CityRealizationDetail({ page }: CityRealizationDetailPro
 
       <section className="gallery-section realization-gallery-section" id="projekty">
         <div className="container">
-          <div className="section-head reveal is-visible">
+          <div className="section-head reveal">
             <div>
               <span className="eyebrow">Galeria realizacji</span>
               <h2>Zdjęcia podobnych ujęć dla {page.city}.</h2>
@@ -90,7 +118,7 @@ export default function CityRealizationDetail({ page }: CityRealizationDetailPro
             {page.gallery.map((image, index) => (
               <article
                 key={`${image.src}-${index}`}
-                className={`gallery-card reveal is-visible${index === activeIndex ? " is-current" : ""}`}
+                className={`gallery-card reveal${index === activeIndex ? " is-current" : ""}`}
               >
                 <button
                   type="button"
