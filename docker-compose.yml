@@ -1,6 +1,6 @@
 services:
   web:
-    image: ${IMAGE_NAME:-karol3883/topgreen:latest}
+    image: karol3883/justcode:topgreen
     build:
       context: .
       dockerfile: Dockerfile
