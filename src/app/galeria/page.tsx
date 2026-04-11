@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import PageHero from "@/components/PageHero";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { offerNavItem } from "@/components/site-nav";
 
 type GalleryCategory = "bramy-przesuwne" | "bramy-skrzydlowe" | "ogrodzenia-3d";
 
@@ -123,6 +125,7 @@ export default function GalleryPage() {
       <SiteHeader
         navItems={[
           { href: "/", label: "Strona główna" },
+          offerNavItem,
           { href: "/galeria", label: "Galeria" },
           { href: "/kontakt", label: "Kontakt" },
         ]}
@@ -130,21 +133,13 @@ export default function GalleryPage() {
       />
 
       <main>
-        <section className="hero gallery-hero-section">
-          <div className="container hero-shell">
-            <div className="hero-core reveal">
-              <div className="hero-copy gallery-hero-copy">
-                <span className="eyebrow">Galeria realizacji</span>
-                <h1>Wybrane realizacje bram i ogrodzeń.</h1>
-                <p>
-                  Przeglądaj przykładowe realizacje GAPYS w trzech głównych kategoriach. To układ przygotowany pod
-                  docelowe zdjęcia, lepsze case studies i bardziej rozbudowane portfolio.
-                </p>
-                <span className="hero-fineprint">Bramy przesuwne / Bramy skrzydłowe / Ogrodzenia 3D</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="Galeria realizacji"
+          title="Wybrane realizacje bram i ogrodzeń."
+          description="Przeglądaj przykładowe realizacje GAPYS w trzech głównych kategoriach. To układ przygotowany pod docelowe zdjęcia, lepsze case studies i bardziej rozbudowane portfolio."
+          fineprint="Bramy przesuwne / Bramy skrzydłowe / Ogrodzenia 3D"
+          className="gallery-hero-section"
+        />
 
         <section className="gallery-section">
           <div className="container">

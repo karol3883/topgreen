@@ -1,162 +1,90 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import CityRealizationDetail, { type CityRealization } from "@/components/CityRealizationDetail";
+import PageHero from "@/components/PageHero";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
+import { offerNavItem } from "@/components/site-nav";
 
-type Project = {
-  title: string;
-  category: string;
-  summary: string;
-  scope: string[];
-};
-
-type CityPage = {
-  city: string;
-  region: string;
-  hero: string;
-  intro: string;
-  stats: Array<{ label: string; value: string }>;
-  projects: Project[];
-};
-
-const cityPages: Record<string, CityPage> = {
+const cityPages: Record<string, CityRealization> = {
   warszawa: {
     city: "Warszawa",
     region: "mazowieckie",
-    hero: "Realizacje Warszawa",
-    intro:
-      "Przykładowe realizacje dla Warszawy pokazują kierunek estetyczny, zakres prac i typy systemów, które możemy wdrażać dla nowoczesnych inwestycji prywatnych oraz firmowych.",
-    stats: [
-      { label: "Typ inwestycji", value: "Domy premium i zabudowa miejska" },
-      { label: "Najczęstszy zakres", value: "Bramy, furtki, ogrodzenia frontowe" },
-      { label: "Styl", value: "Minimalizm, ciemne wykończenia, detal premium" },
+    title: "Brama przesuwna z furtka i pelnym frontem",
+    category: "Realizacja premium",
+    description:
+      "Nowoczesny front posesji oparty o brame przesuwna, furtke i spokojny rytm pionowych profili. W tej realizacji kluczowe bylo dopasowanie podzialow do elewacji, zachowanie lekkiej formy i uporzadkowanie calej strefy wjazdu.",
+    scope: [
+      "Brama przesuwna z automatyka",
+      "Furtka wejsciowa z dopasowanym wzorem",
+      "Palisada frontowa i odcinki boczne",
+      "Montaż, regulacja i finalne strojenie systemu",
     ],
-    projects: [
-      {
-        title: "Brama przesuwna z furtką zlicowaną",
-        category: "Bramy",
-        summary:
-          "Dummy realizacja dla inwestycji pod Warszawą, z naciskiem na spokojną geometrię profili i reprezentacyjny front posesji.",
-        scope: ["Projekt układu frontowego", "Brama przesuwna", "Furtka wejściowa", "Montaż i regulacja"],
-      },
-      {
-        title: "Ogrodzenie palisadowe przy nowoczesnej bryle",
-        category: "Ogrodzenia",
-        summary:
-          "Przykładowy system dla klienta indywidualnego, gdzie rytm pionów został dopasowany do podziałów elewacji i stolarki.",
-        scope: ["Palisada frontowa", "Dobór wypełnienia", "Kolorystyka premium"],
-      },
-      {
-        title: "System wjazdowy dla budynku usługowego",
-        category: "Realizacja firmowa",
-        summary:
-          "Wersja demonstracyjna pod stronę SEO, pokazująca ofertę dla obiektów z większą intensywnością użytkowania.",
-        scope: ["Brama automatyczna", "Kontrola dostępu", "Ogrodzenie boczne"],
-      },
+    gallery: [
+      { src: "/images/hero-gate.jpg", alt: "Glowne ujecie frontu z brama przesuwna przy nowoczesnej elewacji." },
+      { src: "/images/hero-entrance.jpg", alt: "Strefa wejscia z furtka i dopasowanymi slupkami frontowymi." },
+      { src: "/images/hero-detail.jpg", alt: "Detal profili i spokojnego wykonczenia w ciemnym kolorze." },
+      { src: "/images/hero-fence.jpg", alt: "Szerszy kadr pokazujacy spojny odcinek ogrodzenia frontowego." },
     ],
   },
   lublin: {
     city: "Lublin",
     region: "lubelskie",
-    hero: "Realizacje Lublin",
-    intro:
-      "Przykładowe realizacje dla Lublina pokazują, jak może wyglądać oferta dla klientów szukających nowoczesnych ogrodzeń, bram i furtek w spójnym standardzie wykonania.",
-    stats: [
-      { label: "Typ inwestycji", value: "Domy jednorodzinne i mniejsze obiekty firmowe" },
-      { label: "Najczęstszy zakres", value: "Front posesji i strefa wejściowa" },
-      { label: "Styl", value: "Nowoczesna prostota i trwałe wykończenia" },
+    title: "Brama skrzydlowa i uporzadkowane wejscie na posesje",
+    category: "Realizacja jednorodzinna",
+    description:
+      "Projekt przygotowany dla inwestycji, w ktorej najwazniejsza byla czytelna kompozycja wejscia, wygodna codzienna obsluga i nowoczesna forma bez przesadnego ciezaru wizualnego.",
+    scope: [
+      "Brama skrzydlowa dla szerokiego frontu",
+      "Furtka z prostym detalem i osprzetem",
+      "Dobor przeseł do bryly budynku",
+      "Kompleksowy montaz calego ukladu",
     ],
-    projects: [
-      {
-        title: "Front posesji z bramą skrzydłową",
-        category: "Bramy",
-        summary:
-          "Przykładowa realizacja dla Lublina, gdzie liczy się uporządkowana kompozycja wejścia i wygodne codzienne użytkowanie.",
-        scope: ["Brama skrzydłowa", "Furtka", "Słupki i detale wykończeniowe"],
-      },
-      {
-        title: "Ogrodzenie premium z ciemnym wykończeniem",
-        category: "Ogrodzenia",
-        summary:
-          "Dummy case dla klienta oczekującego nowoczesnego efektu wizualnego oraz spokojnych proporcji na całej linii frontowej.",
-        scope: ["Ogrodzenie frontowe", "Przęsła boczne", "Spójność z architekturą domu"],
-      },
-      {
-        title: "Wjazd dla obiektu usługowego",
-        category: "Realizacja firmowa",
-        summary:
-          "Demonstracyjna podstrona lokalna pokazująca, że jeden szablon może obsługiwać różne miasta i warianty treści.",
-        scope: ["Brama przesuwna", "Napęd", "System wejściowy"],
-      },
+    gallery: [
+      { src: "/images/hero-entrance.jpg", alt: "Ujecie furtki i wejscia z nowoczesnym detalem przy elewacji." },
+      { src: "/images/hero-fence.jpg", alt: "Front posesji z lekkim rytmem pionow i spokojna geometria." },
+      { src: "/images/hero-detail.jpg", alt: "Zblizenie na wykonczenie skrzydla i dopracowany detal." },
+      { src: "/images/hero-gate.jpg", alt: "Szersze ujecie strefy wjazdu i ustawienia calego frontu." },
     ],
   },
   lodz: {
     city: "Łódź",
     region: "łódzkie",
-    hero: "Realizacje Łódź",
-    intro:
-      "Przykładowe realizacje dla Łodzi pokazują, jak może wyglądać lokalna podstrona oparta o jeden dynamiczny szablon i osobny zestaw treści dla miasta.",
-    stats: [
-      { label: "Typ inwestycji", value: "Zabudowa miejska i domy jednorodzinne" },
-      { label: "Najczęstszy zakres", value: "Bramy, furtki i front posesji" },
-      { label: "Styl", value: "Proste linie i ciemne wykończenia" },
+    title: "Wjazd z brama przesuwna dopasowany do nowoczesnej bryly",
+    category: "Front posesji",
+    description:
+      "Realizacja skupiona na tym, zeby front domu wygladal lekko i nowoczesnie, a jednoczesnie zachowal odpowiednia prywatnosc. Cale rozwiazanie zostalo zlozone jako jedna linia wzornicza.",
+    scope: [
+      "Brama przesuwna z napedem",
+      "Dopasowana furtka i slupki",
+      "Spójny uklad przeseł frontowych",
+      "Konfiguracja i uruchomienie automatyki",
     ],
-    projects: [
-      {
-        title: "Brama przesuwna dla nowoczesnej posesji",
-        category: "Bramy",
-        summary:
-          "Dummy realizacja dla Łodzi przygotowana wyłącznie jako przykład pod routing lokalnych podstron SEO.",
-        scope: ["Brama przesuwna", "Furtka wejściowa", "Dopasowanie do elewacji"],
-      },
-      {
-        title: "Ogrodzenie frontowe z rytmem pionów",
-        category: "Ogrodzenia",
-        summary:
-          "Wariant demonstracyjny pokazujący, jak można różnicować opis i nagłówki dla kolejnego miasta bez tworzenia osobnego pliku.",
-        scope: ["Przęsła frontowe", "Słupki stalowe", "Kolorystyka premium"],
-      },
-      {
-        title: "System wejściowy dla obiektu usługowego",
-        category: "Realizacja firmowa",
-        summary:
-          "Przykład treści lokalnej, która później może zostać zastąpiona prawdziwymi realizacjami i lokalnym copy.",
-        scope: ["Kontrola dostępu", "Brama automatyczna", "Odcinek ogrodzenia"],
-      },
+    gallery: [
+      { src: "/images/hero-gate.jpg", alt: "Glowne ujecie bramy przesuwnej na tle wspolczesnej bryly domu." },
+      { src: "/images/hero-detail.jpg", alt: "Detal pionowych profili i wykonczenia powierzchni." },
+      { src: "/images/hero-fence.jpg", alt: "Widok calego odcinka frontowego z zachowana proporcja." },
+      { src: "/images/hero-entrance.jpg", alt: "Strefa wejscia z furtka i detalami w jednej linii stylistycznej." },
     ],
   },
   kielce: {
     city: "Kielce",
     region: "świętokrzyskie",
-    hero: "Realizacje Kielce",
-    intro:
-      "Przykładowe realizacje dla Kielc pokazują prosty model budowy lokalnych landingów z osobnym SEO, ale wspólnym szablonem Next.js.",
-    stats: [
-      { label: "Typ inwestycji", value: "Domy prywatne i małe obiekty firmowe" },
-      { label: "Najczęstszy zakres", value: "Ogrodzenie frontowe i wjazd" },
-      { label: "Styl", value: "Nowoczesna forma i uporządkowany detal" },
+    title: "Kompletny system ogrodzenia z akcentem na wygode uzytkowania",
+    category: "Kompletna realizacja",
+    description:
+      "W tej realizacji priorytetem bylo polaczenie estetyki premium z wygodnym codziennym korzystaniem ze strefy wejscia i wjazdu. Efekt koncowy jest spokojny, uporzadkowany i dopasowany do charakteru domu.",
+    scope: [
+      "Brama i furtka w jednym standardzie wykonania",
+      "Ogrodzenie frontowe z powtarzalnym rytmem",
+      "Dopasowanie kolorystyki do elewacji",
+      "Montaż calego ukladu i finalna regulacja",
     ],
-    projects: [
-      {
-        title: "Furtka i brama dla inwestycji jednorodzinnej",
-        category: "Bramy",
-        summary:
-          "Dummy content dla Kielc, przygotowany jako kolejny przykład lokalnej podstrony generowanej z jednego pliku.",
-        scope: ["Brama skrzydłowa", "Furtka", "Montaż końcowy"],
-      },
-      {
-        title: "Ogrodzenie premium z ciemnym matem",
-        category: "Ogrodzenia",
-        summary:
-          "Przykładowa sekcja lokalna do późniejszego podmiany na prawdziwe realizacje i bardziej rozbudowany opis miasta.",
-        scope: ["Ogrodzenie frontowe", "Przęsła boczne", "Wykończenie premium"],
-      },
-      {
-        title: "Wjazd dla firmy z kontrolą dostępu",
-        category: "Realizacja firmowa",
-        summary:
-          "Demonstracyjna karta projektowa pokazująca, że możesz skalować ten sam szablon na wiele lokalizacji.",
-        scope: ["Napęd", "Kontrola dostępu", "System wejściowy"],
-      },
+    gallery: [
+      { src: "/images/hero-fence.jpg", alt: "Glowne ujecie kompletnego frontu z ogrodzeniem i strefa wjazdu." },
+      { src: "/images/hero-gate.jpg", alt: "Brama jako dominujacy element calej kompozycji frontowej." },
+      { src: "/images/hero-entrance.jpg", alt: "Wejscie na posesje z dopracowana furtka i detalem slupkow." },
+      { src: "/images/hero-detail.jpg", alt: "Bliski kadr na wykonczenie i spasowanie elementow stalowych." },
     ],
   },
 };
@@ -182,8 +110,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${page.hero} | GAPYS`,
-    description: `Dummy podstrona SEO dla miasta ${page.city}. Realizacje, bramy, furtki i ogrodzenia w jednym dynamicznym szablonie Next.js.`,
+    title: `${page.title} | ${page.city} | GAPYS`,
+    description: `${page.city}: ${page.description}`,
   };
 }
 
@@ -196,112 +124,49 @@ export default async function CityRealizationsPage({ params }: PageProps) {
   }
 
   return (
-    <main>
-        <section className="hero" aria-labelledby="city-realizations-title">
-          <div className="container hero-shell">
-            <div className="hero-core reveal is-visible">
-            <div className="hero-copy city-hero-copy">
-              <span className="eyebrow">Realizacje lokalne</span>
-              <h1 id="city-realizations-title">{page.hero}</h1>
-              <p>{page.intro}</p>
-              <div className="hero-actions">
-                <a className="btn btn-primary" href="#projekty">
-                  Zobacz przykłady
-                </a>
-                <Link className="btn btn-secondary" href="/kontakt">
-                  Kontakt
-                </Link>
-              </div>
-              <span className="hero-fineprint">{page.city} / {page.region}</span>
-            </div>
-          </div>
+    <>
+      <SiteHeader
+        navItems={[
+          { href: "/", label: "Strona główna" },
+          offerNavItem,
+          { href: "/realizacje", label: "Realizacje" },
+          { href: "/kontakt", label: "Kontakt" },
+        ]}
+        activeHref="/realizacje"
+      />
+
+      <main>
+        <PageHero
+          eyebrow="Wybrana realizacja"
+          title={page.city}
+          description={page.title}
+          fineprint={`${page.city} / ${page.region}`}
+          titleId="city-realizations-title"
+          actions={
+            <>
+              <a className="btn btn-primary" href="#projekty">
+                Zobacz galerie
+              </a>
+              <a className="btn btn-secondary" href="#opis-realizacji">
+                Przejdz do opisu
+              </a>
+            </>
+          }
+        />
+
+        <div id="opis-realizacji">
+          <CityRealizationDetail page={page} />
         </div>
-      </section>
+      </main>
 
-      <section className="section section-divider">
-        <div className="container">
-          <div className="section-head reveal is-visible">
-            <div>
-              <span className="eyebrow">Strona SEO</span>
-              <h2>Jedna dynamiczna trasa, osobny content dla każdego miasta.</h2>
-            </div>
-            <p>
-              Ta podstrona jest generowana z jednego pliku `page.tsx`, ale dla każdego miasta może mieć własne
-              nagłówki, opis, dane projektów i osobne meta tagi.
-            </p>
-          </div>
-
-          <div className="stats-panel reveal is-visible">
-            {page.stats.map((item) => (
-              <article key={item.label} className="stat-card">
-                <span className="pill">{item.label}</span>
-                <strong style={{ fontSize: "clamp(1.35rem, 2vw, 2rem)", lineHeight: 1.05 }}>{item.value}</strong>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section" id="projekty">
-        <div className="container">
-          <div className="section-head reveal is-visible">
-            <div>
-              <span className="eyebrow">Dummy data</span>
-              <h2>Przykładowe realizacje dla miasta {page.city}.</h2>
-            </div>
-            <p>
-              Na razie to dane demonstracyjne, ale dokładnie w tym miejscu możesz później podmieniać lokalne case
-              studies, zakresy prac, FAQ i treści pod SEO.
-            </p>
-          </div>
-
-          <div className="offers-grid">
-            {page.projects.map((project) => (
-              <article key={project.title} className="offer-card reveal is-visible">
-                <div className="offer-visual"></div>
-                <div>
-                  <span className="pill">{project.category}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <div style={{ marginTop: 22, display: "grid", gap: 10 }}>
-                    {project.scope.map((item) => (
-                      <span key={item} style={{ color: "var(--muted)", lineHeight: 1.7 }}>
-                        • {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-divider" id="kontakt">
-        <div className="container cta-grid">
-          <div className="cta-main reveal is-visible">
-            <div className="cta-copy">
-              <span className="eyebrow">Następny krok</span>
-              <h2>{page.city}: ten sam szablon może obsłużyć dziesiątki lokalnych landingów.</h2>
-              <p>
-                Jeśli będziesz chciał, w kolejnym kroku możemy ten model rozszerzyć na kombinacje typu miasto +
-                usługa, np. `warszawa/bramy` albo `lublin/ogrodzenia`.
-              </p>
-            </div>
-            <div className="cta-side">
-              <div className="cta-direct">
-                <Link href="/realizacje/warszawa">/realizacje/warszawa</Link>
-                <Link href="/realizacje/lublin">/realizacje/lublin</Link>
-              </div>
-              <div className="cta-actions">
-                <Link className="btn btn-primary" href="/kontakt">
-                  Przejdź dalej
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+      <SiteFooter
+        navLinks={[
+          { href: "/", label: "Strona główna" },
+          { href: "/oferta", label: "Oferta" },
+          { href: "/realizacje", label: "Realizacje" },
+          { href: "/kontakt", label: "Kontakt" },
+        ]}
+      />
+    </>
   );
 }

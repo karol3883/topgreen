@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
+import { offerNavItem } from "@/components/site-nav";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
 const navItems = [
   { href: "#home", label: "Strona główna" },
+  offerNavItem,
   { href: "/galeria", label: "Galeria" },
   // { href: "#o-nas", label: "O nas" },
   { href: "/kontakt", label: "Kontakt" },

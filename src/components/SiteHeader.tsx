@@ -7,6 +7,7 @@ import { useEffect, useId, useState } from "react";
 type NavItem = {
   href: string;
   label: string;
+  children?: NavItem[];
 };
 
 type SiteHeaderProps = {
@@ -73,6 +74,8 @@ export default function SiteHeader({ navItems, activeHref, sectionIds, brandHref
     return activeHref === href;
   };
 
+  const hasActiveChild = (item: NavItem) => item.children?.some((child) => isActive(child.href)) ?? false;
+
   const logoHref = brandHref ?? (navItems[0]?.href.startsWith("#") ? navItems[0].href : "/");
 
   return (
@@ -90,17 +93,56 @@ export default function SiteHeader({ navItems, activeHref, sectionIds, brandHref
           )}
 
           <div className="nav">
-            {navItems.map((item) =>
-              item.href.startsWith("#") ? (
-                <a key={item.href} className={isActive(item.href) ? "is-active" : undefined} href={item.href}>
+            {navItems.map((item) => {
+              const itemIsActive = isActive(item.href) || hasActiveChild(item);
+
+              if (item.children?.length) {
+                return (
+                  <div key={item.href} className="nav-dropdown">
+                    <Link className={`nav-dropdown-trigger${itemIsActive ? " is-active" : ""}`} href={item.href}>
+                      <span>{item.label}</span>
+                      <svg viewBox="0 0 20 20" className="nav-dropdown-icon" aria-hidden="true">
+                        <path
+                          d="M5 7l5 5 5-5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </Link>
+                    <div className="nav-dropdown-menu">
+                      <div className="nav-dropdown-head">
+                        <span className="nav-dropdown-label">Zakres oferty</span>
+                      </div>
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          className={`nav-dropdown-item${isActive(child.href) ? " is-active" : ""}`}
+                          href={child.href}
+                        >
+                          <span>{child.label}</span>
+                          <span className="nav-dropdown-item-arrow" aria-hidden="true">
+                            ↗
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              return item.href.startsWith("#") ? (
+                <a key={item.href} className={itemIsActive ? "is-active" : undefined} href={item.href}>
                   {item.label}
                 </a>
               ) : (
-                <Link key={item.href} className={isActive(item.href) ? "is-active" : undefined} href={item.href}>
+                <Link key={item.href} className={itemIsActive ? "is-active" : undefined} href={item.href}>
                   {item.label}
                 </Link>
-              )
-            )}
+              );
+            })}
           </div>
 
           <div className="header-actions">
@@ -124,27 +166,45 @@ export default function SiteHeader({ navItems, activeHref, sectionIds, brandHref
         </nav>
 
         <div className={`mobile-menu${menuOpen ? " is-open" : ""}`} id={menuId}>
-          {navItems.map((item) =>
-            item.href.startsWith("#") ? (
-              <a
-                key={item.href}
-                className={`mobile-link${isActive(item.href) ? " is-active" : ""}`}
-                href={item.href}
-                onClick={closeMenu}
-              >
-                {item.label}
-              </a>
-            ) : (
-              <Link
-                key={item.href}
-                className={`mobile-link${isActive(item.href) ? " is-active" : ""}`}
-                href={item.href}
-                onClick={closeMenu}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+          {navItems.map((item) => {
+            const itemIsActive = isActive(item.href) || hasActiveChild(item);
+
+            return (
+              <div key={item.href} className="mobile-group">
+                {item.href.startsWith("#") ? (
+                  <a
+                    className={`mobile-link${itemIsActive ? " is-active" : ""}`}
+                    href={item.href}
+                    onClick={closeMenu}
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    className={`mobile-link${itemIsActive ? " is-active" : ""}`}
+                    href={item.href}
+                    onClick={closeMenu}
+                  >
+                    {item.label}
+                  </Link>
+                )}
+                {item.children?.length ? (
+                  <div className="mobile-submenu">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        className={`mobile-sublink${isActive(child.href) ? " is-active" : ""}`}
+                        href={child.href}
+                        onClick={closeMenu}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
           <div className="mobile-actions">
             <a className="btn btn-secondary" href="tel:+48123456789" onClick={closeMenu}>
               +48 123 456 789

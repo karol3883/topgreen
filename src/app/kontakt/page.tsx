@@ -1,8 +1,10 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import PageHero from "@/components/PageHero";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { offerNavItem } from "@/components/site-nav";
 
 const contactItems = [
   {
@@ -153,6 +155,7 @@ export default function KontaktPage() {
       <SiteHeader
         navItems={[
           { href: "/", label: "Strona główna" },
+          offerNavItem,
           { href: "/galeria", label: "Galeria" },
           { href: "/kontakt", label: "Kontakt" },
         ]}
@@ -160,28 +163,23 @@ export default function KontaktPage() {
       />
 
       <main>
-        <section className="hero contact-hero" id="kontakt" aria-labelledby="contact-hero-title">
-          <div className="container hero-shell">
-            <div className="hero-core reveal">
-              <div className="hero-copy contact-hero-copy">
-                <span className="eyebrow">Kontakt</span>
-                <h1 id="contact-hero-title">Porozmawiajmy o Twojej inwestycji.</h1>
-                <p>
-                  Jeśli chcesz zamówić ogrodzenie, bramę lub furtkę w standardzie premium, skontaktuj się z nami.
-                  Doradzimy i wskażemy najlepszy kierunek realizacji.
-                </p>
-                <div className="hero-actions">
-                  <a className="btn btn-primary" href="#formularz">
-                    Wyślij zapytanie
-                  </a>
-                  <a className="btn btn-secondary" href="tel:+48123456789">
-                    Zadzwoń do nas
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          eyebrow="Kontakt"
+          title="Porozmawiajmy o Twojej inwestycji."
+          description="Jeśli chcesz zamówić ogrodzenie, bramę lub furtkę w standardzie premium, skontaktuj się z nami. Doradzimy i wskażemy najlepszy kierunek realizacji."
+          id="kontakt"
+          titleId="contact-hero-title"
+          actions={
+            <>
+              <a className="btn btn-primary" href="#formularz">
+                Wyślij zapytanie
+              </a>
+              <a className="btn btn-secondary" href="tel:+48123456789">
+                Zadzwoń do nas
+              </a>
+            </>
+          }
+        />
 
         <section className="section section-divider" id="formularz">
           <div className="container contact-layout">
