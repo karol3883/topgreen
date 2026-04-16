@@ -5,6 +5,9 @@ import PageHero from "@/components/PageHero";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 
+const CONTACT_API_URL = process.env.NEXT_PUBLIC_CONTACT_API_URL?.trim() ?? "";
+const CONTACT_API_CONFIGURED = CONTACT_API_URL !== "";
+
 const contactItems = [
   {
     title: "Adres",
@@ -60,7 +63,10 @@ export default function KontaktPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formState, setFormState] = useState<{ tone: "idle" | "success" | "error"; message: string }>({
     tone: "idle",
-    message: "Odpowiadamy możliwie szybko w godzinach pracy.",
+    message:
+      CONTACT_API_CONFIGURED
+        ? "Odpowiadamy możliwie szybko w godzinach pracy."
+        : "Backend formularza nie jest jeszcze skonfigurowany. Po wysłaniu otworzy się Twój program pocztowy.",
   });
 
   useEffect(() => {
@@ -105,22 +111,18 @@ export default function KontaktPage() {
       company: String(formData.get("company") ?? "").trim(),
     };
 
-    if (!payload.name || !payload.phone || !payload.email || !payload.message) {
-      setFormState({
-        tone: "error",
-        message: "Uzupełnij imię, telefon, e-mail i wiadomość.",
-      });
-      return;
-    }
+    // if (!payload.name || !payload.phone || !payload.email || !payload.message) {
+    //   setFormState({
+    //     tone: "error",
+    //     message: "Uzupełnij imię, telefon, e-mail i wiadomość.",
+    //   });
+    //   return;
+    // }
 
     setIsSubmitting(true);
-    setFormState({
-      tone: "idle",
-      message: "Wysyłanie wiadomości...",
-    });
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(`${CONTACT_API_URL.replace(/\/$/, "")}/v1/gapys/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -142,7 +144,12 @@ export default function KontaktPage() {
     } catch (error) {
       setFormState({
         tone: "error",
-        message: error instanceof Error ? error.message : "Nie udało się wysłać wiadomości.",
+        message:
+          CONTACT_API_CONFIGURED
+            ? error instanceof Error && error.message
+              ? error.message
+              : "Nie udało się wysłać wiadomości. Spróbuj ponownie albo napisz na kontakt@gapys.pl."
+            : "Nie udało się otworzyć programu pocztowego. Napisz bezpośrednio na kontakt@gapys.pl.",
       });
     } finally {
       setIsSubmitting(false);
@@ -217,33 +224,72 @@ export default function KontaktPage() {
                 <div className="form-grid">
                   <div className="field">
                     <label htmlFor="name">Imię i nazwisko</label>
-                    <input id="name" name="name" type="text" placeholder="Jan Kowalski" autoComplete="name" />
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Jan Kowalski"
+                      autoComplete="name"
+                      defaultValue="Jan Testowy"
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="phone">Telefon</label>
-                    <input id="phone" name="phone" type="tel" placeholder="+48 123 456 789" autoComplete="tel" />
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="+48 123 456 789"
+                      autoComplete="tel"
+                      defaultValue="123456789"
+                    />
                   </div>
                 </div>
 
                 <div className="form-grid">
                   <div className="field">
                     <label htmlFor="email">E-mail</label>
-                    <input id="email" name="email" type="email" placeholder="kontakt@firma.pl" autoComplete="email" />
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="kontakt@firma.pl"
+                      autoComplete="email"
+                      defaultValue="jan.testowy@example.com"
+                    />
                   </div>
                   <div className="field">
-                    <label htmlFor="service">Zakres</label>
-                    <select id="service" name="service" defaultValue="Ogrodzenie">
-                      <option>Ogrodzenie</option>
-                      <option>Brama</option>
-                      <option>Furtka</option>
-                      <option>Kompletny system</option>
-                    </select>
+                    <label htmlFor="service">Zakres prac</label>
+                    <div className="select-field">
+                      <select id="service" name="service" defaultValue="Ogrodzenie">
+                        <option>Ogrodzenie</option>
+                        <option>Brama</option>
+                        <option>Furtka</option>
+                        <option>Kompletny system</option>
+                      </select>
+                      <span className="select-field__icon" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                          <path
+                            d="m7 10 5 5 5-5"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 <div className="field">
                   <label htmlFor="message">Wiadomość</label>
-                  <textarea id="message" name="message" placeholder="Opisz inwestycję, lokalizację, termin i zakres prac." />
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Opisz inwestycję, lokalizację, termin i zakres prac."
+                    defaultValue="Test formularza z lokalnego środowiska."
+                  />
                 </div>
 
                 <input className="contact-honeypot" type="text" name="company" tabIndex={-1} autoComplete="off" />
@@ -261,21 +307,14 @@ export default function KontaktPage() {
 
         <section className="section">
           <div className="container">
-            <div className="contact-map-card reveal">
-              <div className="contact-map-art">
-                <iframe
-                  title="Mapa Google - Przysucha"
-                  src="https://www.google.com/maps?q=Przysucha%2C%20Polska&z=13&output=embed"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                />
-              </div>
-              <div className="contact-map-meta">
-                <span className="eyebrow">Lokalizacja</span>
-                <strong>Przysucha</strong>
-                <span>Na ten moment ustawiona jako lokalizacja referencyjna dla sekcji mapy.</span>
-              </div>
+            <div className="contact-map-simple reveal">
+              <iframe
+                title="Mapa Google - Przysucha"
+                src="https://www.google.com/maps?q=Przysucha%2C%20Polska&z=13&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </div>
           </div>
         </section>

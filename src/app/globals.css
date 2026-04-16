@@ -1039,6 +1039,34 @@ svg {
     box-shadow 0.25s var(--ease);
 }
 
+.select-field {
+  position: relative;
+}
+
+.select-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 52px;
+  cursor: pointer;
+}
+
+.select-field__icon {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(231, 236, 244, 0.72);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.field select option {
+  color: #0e121a;
+}
+
 .field input::placeholder,
 .field textarea::placeholder {
   color: rgba(231, 236, 244, 0.38);
@@ -1090,97 +1118,17 @@ svg {
   gap: 18px;
 }
 
-.contact-map-card {
-  min-height: 420px;
-  padding: 34px;
-}
-
-.contact-map-card::before {
-  content: "";
-  position: absolute;
-  inset: 20px;
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 46px 46px;
-}
-
-.contact-map-art {
-  position: absolute;
-  inset: 54px;
+.contact-map-simple {
   overflow: hidden;
-  border-radius: 26px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    radial-gradient(circle at 62% 44%, rgba(217, 180, 107, 0.22), transparent 16%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
-    rgba(14, 18, 26, 0.88);
+  border-radius: 32px;
+  aspect-ratio: 16 / 9;
 }
 
-.contact-map-art iframe {
-  position: absolute;
-  inset: 0;
+.contact-map-simple iframe {
+  display: block;
   width: 100%;
   height: 100%;
   border: 0;
-}
-
-.contact-map-art::before,
-.contact-map-art::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.contact-map-art::before {
-  inset: 30% 16% auto 8%;
-  height: 2px;
-  transform: rotate(-14deg);
-}
-
-.contact-map-art::after {
-  inset: 18% 28% auto 18%;
-  height: 2px;
-  transform: rotate(24deg);
-}
-
-.contact-map-pin {
-  position: absolute;
-  left: 62%;
-  top: 44%;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-strong), var(--gold));
-  box-shadow: 0 0 0 10px rgba(217, 180, 107, 0.14);
-}
-
-.contact-map-meta {
-  position: absolute;
-  left: 34px;
-  right: 34px;
-  bottom: 34px;
-  padding: 18px 20px;
-  border-radius: 22px;
-  background: rgba(5, 8, 13, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(14px);
-}
-
-.contact-map-meta strong {
-  display: block;
-  margin-top: 10px;
-  font-size: 1.18rem;
-}
-
-.contact-map-meta span:last-child {
-  display: block;
-  margin-top: 8px;
-  color: var(--muted);
-  line-height: 1.7;
 }
 
 .contact-faq-stack {
@@ -2115,7 +2063,6 @@ svg {
   }
 
   .contact-panel,
-  .contact-map-card,
   .contact-faq-card,
   .contact-cta-main,
   .contact-cta-box {
@@ -2130,14 +2077,8 @@ svg {
     grid-template-columns: 1fr;
   }
 
-  .contact-map-art {
-    inset: 34px 24px 110px;
-  }
-
-  .contact-map-meta {
-    left: 24px;
-    right: 24px;
-    bottom: 24px;
+  .contact-map-simple {
+    aspect-ratio: 4 / 3;
   }
 
   .gallery-card {

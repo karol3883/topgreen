@@ -1,26 +1,11 @@
-FROM node:20-bookworm-slim AS base
+FROM node:20-alpine AS builder
 WORKDIR /app
-ENV NEXT_TELEMETRY_DISABLED=1
-
-FROM base AS deps
 COPY package.json package-lock.json ./
 RUN npm ci
-
-FROM base AS builder
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-FROM node:20-bookworm-slim AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV PORT=80
-
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
+FROM nginx:1.27-alpine
+COPY --from=builder /app/out /usr/share/nginx/html
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
-
-CMD ["node", "server.js"]
