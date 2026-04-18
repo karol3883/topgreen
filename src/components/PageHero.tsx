@@ -35,8 +35,8 @@ export default function PageHero({
     if (!node) return;
 
     if (reduced || !("IntersectionObserver" in window)) {
-      setIsVisible(true);
-      return;
+      const frame = window.requestAnimationFrame(() => setIsVisible(true));
+      return () => window.cancelAnimationFrame(frame);
     }
 
     const observer = new IntersectionObserver(

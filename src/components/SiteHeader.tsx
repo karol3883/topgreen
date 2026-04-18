@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { siteNavItems } from "@/components/site-nav";
+import { siteConfig } from "@/data/site-config";
 
 type NavItem = {
   href: string;
@@ -149,8 +150,8 @@ export default function SiteHeader({ activeHref, sectionIds, brandHref }: SiteHe
           </div>
 
           <div className="header-actions">
-            <a className="phone" href="tel:+48123456789">
-              +48 123 456 789
+            <a className="phone" href={siteConfig.phoneHref}>
+              {siteConfig.phoneDisplay}
             </a>
           </div>
 
@@ -226,8 +227,8 @@ export default function SiteHeader({ activeHref, sectionIds, brandHref }: SiteHe
             );
           })}
           <div className="mobile-actions">
-            <a className="btn btn-secondary" href="tel:+48123456789" onClick={closeMenu}>
-              +48 123 456 789
+            <a className="btn btn-secondary" href={siteConfig.phoneHref} onClick={closeMenu}>
+              {siteConfig.phoneDisplay}
             </a>
           </div>
         </div>

@@ -1,5 +1,5 @@
 export const offerNavItem = {
-  href: "/",
+  href: "/oferta",
   label: "Oferta",
   children: [
     { href: "/oferta/brama-przesuwna", label: "Bramy" },
@@ -11,6 +11,7 @@ export const offerNavItem = {
 export const siteNavItems = [
   { href: "/", label: "Strona główna" },
   offerNavItem,
+  { href: "/realizacje", label: "Realizacje" },
   { href: "/galeria", label: "Galeria" },
   { href: "/kontakt", label: "Kontakt" },
 ];

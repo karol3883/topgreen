@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { siteConfig } from "@/data/site-config";
 
 const homeSectionIds = ["home", "o-nas", "oferta", "kontakt"];
 
@@ -114,18 +116,24 @@ const offerCards = [
     pill: "01 / Ogrodzenia",
     title: "Ogrodzenia premium",
     text: "Minimalistyczne palisady i systemy frontowe o dopracowanym rytmie, wyważonych proporcjach i elegancji wpisanej w architekturę.",
+    href: "/oferta/ogrodzenia-palisadowe",
+    cta: "Zobacz ogrodzenia",
   },
   {
     className: "offer-card offer-card--gate reveal",
     pill: "02 / Bramy",
     title: "Bramy przesuwne i skrzydłowe",
     text: "Rozwiązania zaprojektowane dla komfortu i reprezentacyjnego wyglądu, z możliwością integracji z automatyką i kontrolą dostępu.",
+    href: "/oferta/brama-przesuwna",
+    cta: "Zobacz bramy",
   },
   {
     className: "offer-card offer-card--wicket reveal",
     pill: "03 / Furtki",
     title: "Furtki i wejścia boczne",
     text: "Subtelne moduły wejściowe, które dopełniają kompozycję frontu i wzmacniają pierwsze wrażenie już przy wejściu na posesję.",
+    href: "/oferta/furtki-wejsciowe",
+    cta: "Zobacz furtki",
   },
 ];
 
@@ -229,9 +237,6 @@ export default function HomePage() {
           <div className="container hero-shell">
             <div className="hero-core reveal">
               <div className="hero-copy">
-                <h1 id="hero-title" className="sr-only">
-                  GAPYS
-                </h1>
                 <Image
                   src="/logo-optimized.webp"
                   alt="GAPYS"
@@ -240,14 +245,18 @@ export default function HomePage() {
                   priority
                   className="hero-logo"
                 />
-                <p>Ogrodzenia, bramy i furtki zaprojektowane tak, by od pierwszego spojrzenia robiły właściwe wrażenie.</p>
+                <h1 id="hero-title">Ogrodzenia, bramy i furtki premium.</h1>
+                <p>
+                  Projektujemy, produkujemy i montujemy nowoczesne systemy ogrodzeń dla inwestycji prywatnych oraz
+                  komercyjnych.
+                </p>
                 <div className="hero-actions">
                   <a className="btn btn-primary" href="#oferta">
                     Zobacz ofertę
                   </a>
-                  <a className="btn btn-secondary" href="#kontakt">
+                  <Link className="btn btn-secondary" href="/kontakt">
                     Skontaktuj się
-                  </a>
+                  </Link>
                 </div>
                 <span className="hero-fineprint">Projekt / produkcja / montaż</span>
               </div>
@@ -338,9 +347,9 @@ export default function HomePage() {
                     <span className="pill">{item.pill}</span>
                     <h3>{item.title}</h3>
                     <p>{item.text}</p>
-                    <a className="offer-link" href="#kontakt">
-                      Dowiedz się więcej <span aria-hidden="true">→</span>
-                    </a>
+                    <Link className="offer-link" href={item.href}>
+                      {item.cta} <span aria-hidden="true">→</span>
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -420,16 +429,16 @@ export default function HomePage() {
               </div>
               <div className="cta-side">
                 <div className="cta-actions">
-                  <a className="btn btn-primary" href="mailto:kontakt@gapys.pl">
+                  <a className="btn btn-primary" href={siteConfig.emailHref}>
                     Napisz do nas
                   </a>
-                  <a className="btn btn-secondary" href="tel:+48123456789">
+                  <a className="btn btn-secondary" href={siteConfig.phoneHref}>
                     Zadzwoń do nas
                   </a>
                 </div>
                 <div className="cta-direct">
-                  <a href="mailto:kontakt@gapys.pl">kontakt@gapys.pl</a>
-                  <a href="tel:+48123456789">+48 123 456 789</a>
+                  <a href={siteConfig.emailHref}>{siteConfig.email}</a>
+                  <a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a>
                 </div>
               </div>
             </div>
@@ -439,7 +448,7 @@ export default function HomePage() {
       <SiteFooter
         navLinks={[
           { href: "#oferta", label: "Oferta" },
-          { href: "#o-nas", label: "O nas" },
+          { href: "/realizacje", label: "Realizacje" },
           { href: "/galeria", label: "Galeria" },
           { href: "/kontakt", label: "Kontakt" },
         ]}

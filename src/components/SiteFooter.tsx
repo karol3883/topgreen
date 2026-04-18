@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { fullAddress, siteConfig } from "@/data/site-config";
 
 type FooterLink = {
   href: string;
@@ -26,13 +27,13 @@ export default function SiteFooter({ navLinks }: SiteFooterProps) {
           </div>
           <div>
             <strong>Kontakt</strong>
-            <p>+48 123 456 789</p>
-            <p>kontakt@gapys.pl</p>
             <p>
-              ul. Przemysłowa 18
-              <br />
-              00-000 Warszawa
+              <a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a>
             </p>
+            <p>
+              <a href={siteConfig.emailHref}>{siteConfig.email}</a>
+            </p>
+            <p>{fullAddress}</p>
           </div>
           <div>
             <strong>Nawigacja</strong>
@@ -44,14 +45,18 @@ export default function SiteFooter({ navLinks }: SiteFooterProps) {
               ))}
             </div>
           </div>
-          <div>
-            <strong>Social</strong>
-            <div className="socials">
-              <a href="#">Instagram</a>
-              <a href="#">Facebook</a>
-              <a href="#">LinkedIn</a>
+          {siteConfig.socialLinks.length ? (
+            <div>
+              <strong>Social</strong>
+              <div className="socials">
+                {siteConfig.socialLinks.map((link) => (
+                  <a key={link.href} href={link.href} rel="noreferrer" target="_blank">
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : null}
           <div>
             <strong>Województwa</strong>
             <div className="footer-accordion">

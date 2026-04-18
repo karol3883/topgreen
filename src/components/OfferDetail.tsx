@@ -52,7 +52,10 @@ export default function OfferDetail({ page }: OfferDetailProps) {
         observer.disconnect();
       };
     } else {
-      setIsVisible(true);
+      const frame = window.requestAnimationFrame(() => setIsVisible(true));
+      return () => {
+        window.cancelAnimationFrame(frame);
+      };
     }
   }, []);
 
