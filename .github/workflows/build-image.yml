@@ -63,7 +63,7 @@ jobs:
             curl -sS -o "${response_file}" -w "%{http_code}" \
               --data-urlencode "srv=${MIKRUS_SRV}" \
               --data-urlencode "key=${MIKRUS_KEY}" \
-              --data-urlencode "cmd=cd /opt/mikrus && ./run.sh topgreen" \
+              --data-urlencode "cmd=cd /opt/mikrus && bash ./run.sh topgreen" \
               https://api.mikr.us/exec
           )"
 
