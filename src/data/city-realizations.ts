@@ -5,6 +5,7 @@ export const cityPages: Record<string, CityRealization> = {
     city: "Warszawa",
     region: "mazowieckie",
     title: "Brama przesuwna z furtka i pelnym frontem",
+    seoTitle: "Warszawa - brama przesuwna z furtka | GAPYS",
     category: "Realizacja premium",
     description:
       "Nowoczesny front posesji oparty o brame przesuwna, furtke i spokojny rytm pionowych profili. W tej realizacji kluczowe bylo dopasowanie podzialow do elewacji, zachowanie lekkiej formy i uporzadkowanie calej strefy wjazdu.",
@@ -25,6 +26,7 @@ export const cityPages: Record<string, CityRealization> = {
     city: "Lublin",
     region: "lubelskie",
     title: "Brama skrzydlowa i uporzadkowane wejscie na posesje",
+    seoTitle: "Lublin - brama skrzydlowa i furtka | GAPYS",
     category: "Realizacja jednorodzinna",
     description:
       "Projekt przygotowany dla inwestycji, w ktorej najwazniejsza byla czytelna kompozycja wejscia, wygodna codzienna obsluga i nowoczesna forma bez przesadnego ciezaru wizualnego.",
@@ -45,6 +47,7 @@ export const cityPages: Record<string, CityRealization> = {
     city: "Łódź",
     region: "łódzkie",
     title: "Wjazd z brama przesuwna dopasowany do nowoczesnej bryly",
+    seoTitle: "Łódź - nowoczesna brama przesuwna | GAPYS",
     category: "Front posesji",
     description:
       "Realizacja skupiona na tym, zeby front domu wygladal lekko i nowoczesnie, a jednoczesnie zachowal odpowiednia prywatnosc. Cale rozwiazanie zostalo zlozone jako jedna linia wzornicza.",
@@ -65,6 +68,7 @@ export const cityPages: Record<string, CityRealization> = {
     city: "Kielce",
     region: "świętokrzyskie",
     title: "Kompletny system ogrodzenia z akcentem na wygode uzytkowania",
+    seoTitle: "Kielce - ogrodzenie, brama i furtka | GAPYS",
     category: "Kompletna realizacja",
     description:
       "W tej realizacji priorytetem bylo polaczenie estetyki premium z wygodnym codziennym korzystaniem ze strefy wejscia i wjazdu. Efekt koncowy jest spokojny, uporzadkowany i dopasowany do charakteru domu.",

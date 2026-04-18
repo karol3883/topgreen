@@ -6,15 +6,16 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   ...buildMetadata({
-    title: `${siteConfig.name} | ${siteConfig.defaultTitle}`,
+    title: `${siteConfig.defaultTitle} | ${siteConfig.name}`,
     description: siteConfig.description,
     path: "/",
     keywords: [
       "ogrodzenia premium",
+      "ogrodzenia na wymiar",
       "bramy przesuwne",
       "bramy skrzydłowe",
       "furtki wejściowe",
-      "ogrodzenia Warszawa",
+      "ogrodzenia łódzkie",
     ],
   }),
   applicationName: siteConfig.name,

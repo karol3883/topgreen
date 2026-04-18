@@ -5,10 +5,10 @@ import { fullAddress, siteConfig } from "@/data/site-config";
 import { absoluteUrl, buildMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Kontakt | Ogrodzenia, bramy i furtki | GAPYS",
+  title: "Kontakt i wycena ogrodzeń oraz bram | GAPYS",
   description: `Skontaktuj się z GAPYS, aby omówić projekt, produkcję i montaż ogrodzenia, bramy lub furtki. Biuro: ${fullAddress}.`,
   path: "/kontakt",
-  keywords: ["kontakt GAPYS", "ogrodzenia kontakt", "bramy kontakt", "furtki kontakt", "Warszawa"],
+  keywords: ["kontakt GAPYS", "ogrodzenia kontakt", "bramy kontakt", "furtki kontakt", "Poświętne"],
 });
 
 export default function Page() {

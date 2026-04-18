@@ -12,6 +12,7 @@ export type CityRealization = {
   city: string;
   region: string;
   title: string;
+  seoTitle?: string;
   category: string;
   description: string;
   scope: string[];

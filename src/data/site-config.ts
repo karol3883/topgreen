@@ -2,14 +2,14 @@ export const siteConfig = {
   name: "GAPYS",
   legalName: "GAPYS",
   siteUrl: (process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://gapys.pl").replace(/\/+$/, ""),
-  defaultTitle: "Ogrodzenia, bramy i furtki premium",
+  defaultTitle: "Ogrodzenia, bramy i furtki na wymiar",
   description:
     "GAPYS projektuje, produkuje i montuje nowoczesne ogrodzenia, bramy oraz furtki dla inwestycji prywatnych i komercyjnych.",
   ogImage: {
     path: "/img.png",
     width: 1320,
     height: 447,
-    alt: "GAPYS - ogrodzenia, bramy i furtki premium",
+    alt: "GAPYS - ogrodzenia, bramy i furtki na wymiar",
   },
   phoneDisplay: "(+48) 511 201 919",
   phoneHref: "tel:+48511201919",

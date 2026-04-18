@@ -1728,9 +1728,12 @@ svg {
 }
 
 .footer-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.9fr 0.8fr 0.8fr 0.95fr;
-  gap: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 28px;
+  row-gap: 24px;
   padding-top: 26px;
   padding-bottom: 26px;
   padding-left: max(18px, calc((100vw - 1220px) / 2 + 18px));
@@ -1739,6 +1742,19 @@ svg {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(11, 15, 22, 0.8);
   box-shadow: var(--shadow-lg);
+}
+
+.footer-grid > * {
+  flex: 0 1 190px;
+}
+
+.footer-grid > :first-child {
+  flex: 1 1 340px;
+  max-width: 420px;
+}
+
+.footer-grid > :last-child {
+  flex-basis: 240px;
 }
 
 .footer strong {
@@ -1859,7 +1875,7 @@ svg {
 
   .offers-grid,
   .footer-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .contact-layout,
@@ -2089,9 +2105,12 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  .gallery-card::after {
+    display: none;
+  }
+
   .gallery-meta {
-    opacity: 1;
-    transform: translateY(0);
+    display: none;
   }
 
   .realization-stage,

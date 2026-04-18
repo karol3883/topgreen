@@ -10,7 +10,7 @@ import { buildMetadata, getBreadcrumbJsonLd, getItemListJsonLd } from "@/lib/seo
 const cityOrder = ["warszawa", "lodz", "lublin", "kielce"] as const;
 
 export const metadata: Metadata = buildMetadata({
-  title: "Realizacje ogrodzeń i bram | GAPYS",
+  title: "Realizacje ogrodzeń, bram i furtek | GAPYS",
   description:
     "Przegląd realizacji GAPYS w wybranych miastach. Zobacz przykłady nowoczesnych ogrodzeń, bram i furtek dopasowanych do architektury inwestycji.",
   path: "/realizacje",

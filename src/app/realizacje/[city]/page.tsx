@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return buildMetadata({
-    title: `${page.title} | ${page.city} | GAPYS`,
+    title: page.seoTitle ?? `${page.city} - realizacja ogrodzenia i bramy | GAPYS`,
     description: `${page.city}: ${page.description}`,
     path: `/realizacje/${city}`,
     keywords: [page.city, page.title, page.category, "realizacje", "ogrodzenia", "bramy", "GAPYS"],

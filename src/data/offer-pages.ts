@@ -3,6 +3,7 @@ import type { OfferDetailData } from "@/components/OfferDetail";
 export type OfferPage = OfferDetailData & {
   hero: string;
   intro: string;
+  seoTitle: string;
 };
 
 const commonGallery = [
@@ -17,6 +18,7 @@ export const offerPages: Record<string, OfferPage> = {
     offer: "Ogrodzenia palisadowe",
     category: "Ogrodzenia nowoczesne",
     hero: "Ogrodzenia palisadowe",
+    seoTitle: "Ogrodzenia palisadowe premium | GAPYS",
     intro:
       "System palisadowy dla inwestorow, ktorzy chca zachowac prosta geometrie, nowoczesny detal i spojny charakter calego frontu posesji.",
     title: "Nowoczesne ogrodzenie palisadowe z wyrazna, pozioma ekspozycja kadru",
@@ -34,6 +36,7 @@ export const offerPages: Record<string, OfferPage> = {
     offer: "Ogrodzenia panelowe",
     category: "Systemy panelowe",
     hero: "Ogrodzenia panelowe",
+    seoTitle: "Ogrodzenia panelowe na posesje | GAPYS",
     intro:
       "Rozwiazanie dla klientow, ktorzy chca polaczyc szybki montaz, dobra estetyke i przewidywalny budzet inwestycji.",
     title: "Ogrodzenia panelowe do posesji prywatnych i obiektow uzytkowych",
@@ -51,6 +54,7 @@ export const offerPages: Record<string, OfferPage> = {
     offer: "Brama przesuwna",
     category: "Strefa wjazdu",
     hero: "Brama przesuwna",
+    seoTitle: "Brama przesuwna z automatyką | GAPYS",
     intro:
       "Wjazd dla klientow, ktorzy potrzebuja wygody codziennego uzytkowania, stabilnej pracy i nowoczesnej formy frontu posesji.",
     title: "Brama przesuwna jako glowny element nowoczesnego frontu",
@@ -68,6 +72,7 @@ export const offerPages: Record<string, OfferPage> = {
     offer: "Brama skrzydłowa",
     category: "Klasyczny wjazd",
     hero: "Brama skrzydłowa",
+    seoTitle: "Brama skrzydłowa na posesję | GAPYS",
     intro:
       "Rozwiazanie dla inwestycji, w ktorych najlepiej sprawdza sie tradycyjna forma otwierania i klarowny uklad strefy wejsciowej.",
     title: "Brama skrzydlowa z naciskiem na proporcje i czysty detal",
@@ -85,6 +90,7 @@ export const offerPages: Record<string, OfferPage> = {
     offer: "Furtki wejściowe",
     category: "Strefa wejścia",
     hero: "Furtki wejściowe",
+    seoTitle: "Furtki wejściowe na wymiar | GAPYS",
     intro:
       "Rozwiazanie dla klientow, ktorzy chca uporzadkowac wejscie na posesje i zachowac spojny charakter z brama oraz ogrodzeniem.",
     title: "Furtki wejsciowe dopasowane do calej kompozycji frontu",
@@ -102,6 +108,7 @@ export const offerPages: Record<string, OfferPage> = {
     offer: "Automatyka i kontrola",
     category: "Napędy i sterowanie",
     hero: "Automatyka i kontrola",
+    seoTitle: "Automatyka do bram i furtek | GAPYS",
     intro:
       "Systemy sterowania dla bram i furtek, ktore poprawiaja wygode uzytkowania, bezpieczenstwo oraz codzienna powtarzalnosc dzialania.",
     title: "Automatyka do strefy wjazdu i wejscia bez przypadkowych rozwiazan",

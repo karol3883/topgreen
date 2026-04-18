@@ -19,7 +19,7 @@ const offerOrder = [
 const visualClasses = ["offer-card--fence", "offer-card--gate", "offer-card--wicket"] as const;
 
 export const metadata: Metadata = buildMetadata({
-  title: "Oferta ogrodzeń, bram i furtek | GAPYS",
+  title: "Oferta ogrodzeń, bram i furtek na wymiar | GAPYS",
   description:
     "Poznaj ofertę GAPYS: ogrodzenia palisadowe, systemy panelowe, bramy przesuwne i skrzydłowe, furtki oraz automatykę.",
   path: "/oferta",

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return buildMetadata({
-    title: `${page.hero} | GAPYS`,
+    title: page.seoTitle,
     description: page.description,
     path: `/oferta/${offer}`,
     keywords: [page.hero, page.offer, page.category, "GAPYS", "ogrodzenia", "bramy", "furtki"],

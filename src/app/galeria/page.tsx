@@ -4,7 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { buildMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Galeria realizacji ogrodzeń i bram | GAPYS",
+  title: "Galeria realizacji ogrodzeń i bram premium | GAPYS",
   description:
     "Galeria realizacji GAPYS: nowoczesne bramy przesuwne, bramy skrzydłowe oraz ogrodzenia dla inwestycji prywatnych i komercyjnych.",
   path: "/galeria",
