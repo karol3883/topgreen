@@ -11,22 +11,31 @@ Aktualizować przy każdej większej zmianie treści, struktury URL albo danych 
 - E-mail: `gapys.biuro@gmail.com`
 - Telefon: `(+48) 511 201 919`
 - Plik konfiguracyjny aplikacji: [src/data/site-config.ts](/opt/topgreen/src/data/site-config.ts:1)
+- Obszar działania na teraz:
+  - `łódzkie`: `Drzewica`, `Opoczno`, `Tomaszów Mazowiecki`
+  - `mazowieckie`: `Nowe Miasto nad Pilicą`, `Przysucha`, `Białobrzegi`
+  - `świętokrzyskie`: `Końskie`, `Stąporków`, `Skarżysko-Kamienna`
 
 ## Wdrożone Technicznie
 
 - Unikalne metadata per strona
 - `canonical`, `Open Graph`, `Twitter Card`
 - `schema.org` dla strony, organizacji i local business
-- Strony indeksowe: `/oferta`, `/realizacje`
+- Strony indeksowe: `/oferta`, `/obszar-dzialania`
+- Strony regionalne:
+  - `/obszar-dzialania/lodzkie`
+  - `/obszar-dzialania/mazowieckie`
+  - `/obszar-dzialania/swietokrzyskie`
 - `robots.txt` i `sitemap.xml`
 - Spójne dane kontaktowe w aplikacji
 - Mapa Google na stronie kontaktu ustawiona na aktualny adres
+- Przekierowanie `301` z dawnych URL-i `/realizacje` na `/obszar-dzialania`
 
 ## Najwyższy Priorytet Teraz
 
 - Podmienić ogólne lub robocze claimy na realne dane
 - Rozbudować treści ofert o bardziej konkretne, unikalne opisy
-- Rozbudować realizacje miejskie o realne case studies
+- Rozbudować obszar działania o mocniejsze treści regionalne
 - Podmienić galerię z ogólnych przykładów na prawdziwe realizacje
 - Przygotować dedykowane obrazy social share dla najważniejszych stron
 
@@ -47,17 +56,21 @@ Aktualizować przy każdej większej zmianie treści, struktury URL albo danych 
   - typowi klienci
   - proces współpracy
   - zakres usług dodatkowych
+- Materiały lokalne:
+  - realne zdjęcia z inwestycji w najbliższych regionach
+  - lokalne frazy i pytania klientów z wybranych miast
+  - potwierdzenie, które miasta warto rozwinąć później do osobnych landingów
 
 ## Backlog SEO
 
 - Dodać dedykowane `og:image` dla:
   - `/`
   - `/oferta`
-  - `/realizacje`
+  - `/obszar-dzialania`
   - `/kontakt`
-- Rozważyć osobne obrazy `og:image` dla ofert i realizacji
-- Dodać więcej linkowania wewnętrznego między ofertami i realizacjami
-- Dodać więcej treści lokalnych pod miasta / regiony
+- Rozważyć osobne obrazy `og:image` dla ofert i stron lokalnych
+- Dodać więcej linkowania wewnętrznego między ofertami i obszarem działania
+- Rozwinąć regionalne sekcje o mocniejsze treści lokalne, ale bez klonowania miast
 - Sprawdzić po wdrożeniu:
   - Google Search Console
   - Google Business Profile
@@ -79,3 +92,5 @@ Aktualizować przy każdej większej zmianie treści, struktury URL albo danych 
 
 - `2026-04-18`: wdrożono podstawy technicznego SEO, uporządkowano metadata, canonicale, dane strukturalne, `robots.txt`, `sitemap.xml`, strony `/oferta` i `/realizacje`
 - `2026-04-18`: zaktualizowano dane kontaktowe na `Brudzewice 9, 26-315 Poświętne`, `gapys.biuro@gmail.com`, `(+48) 511 201 919`
+- `2026-04-18`: usunięto sekcję `/realizacje`, dodano `/obszar-dzialania` z województwami i listą bliskich miast oraz przekierowanie `301` na nowy URL
+- `2026-04-18`: dodano osobne podstrony województw pod `/obszar-dzialania/[region]` z osobnym SEO, treścią i linkowaniem wewnętrznym

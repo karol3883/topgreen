@@ -11,9 +11,24 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gapys.pl/realizacje</loc>
+    <loc>https://gapys.pl/obszar-dzialania</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://gapys.pl/obszar-dzialania/lodzkie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gapys.pl/obszar-dzialania/mazowieckie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gapys.pl/obszar-dzialania/swietokrzyskie</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gapys.pl/galeria</loc>
@@ -54,25 +69,5 @@
     <loc>https://gapys.pl/oferta/automatyka-i-kontrola</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://gapys.pl/realizacje/warszawa</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gapys.pl/realizacje/lodz</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gapys.pl/realizacje/lublin</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gapys.pl/realizacje/kielce</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { fullAddress, siteConfig } from "@/data/site-config";
+import { serviceRegions } from "@/data/service-areas";
 
 type FooterLink = {
   href: string;
@@ -60,24 +61,19 @@ export default function SiteFooter({ navLinks }: SiteFooterProps) {
           <div>
             <strong>Województwa</strong>
             <div className="footer-accordion">
-              <details className="footer-region">
-                <summary>Mazowieckie</summary>
-                <div className="footer-cities">
-                  <Link href="/realizacje/warszawa">Warszawa</Link>
-                </div>
-              </details>
-              <details className="footer-region">
-                <summary>Łódzkie</summary>
-                <div className="footer-cities">
-                  <Link href="/realizacje/lodz">Łódź</Link>
-                </div>
-              </details>
-              <details className="footer-region">
-                <summary>Świętokrzyskie</summary>
-                <div className="footer-cities">
-                  <Link href="/realizacje/kielce">Kielce</Link>
-                </div>
-              </details>
+              {serviceRegions.map((region) => (
+                <details key={region.slug} className="footer-region">
+                  <summary>{region.name}</summary>
+                  <div className="footer-cities">
+                    <Link href={`/obszar-dzialania/${region.slug}`}>Zobacz województwo</Link>
+                    {region.cities.map((city) => (
+                      <Link key={city} href={`/obszar-dzialania/${region.slug}`}>
+                        {city}
+                      </Link>
+                    ))}
+                  </div>
+                </details>
+              ))}
             </div>
           </div>
         </div>

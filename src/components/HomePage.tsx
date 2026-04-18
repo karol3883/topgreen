@@ -448,7 +448,7 @@ export default function HomePage() {
       <SiteFooter
         navLinks={[
           { href: "#oferta", label: "Oferta" },
-          { href: "/realizacje", label: "Realizacje" },
+          { href: "/obszar-dzialania", label: "Obszar działania" },
           { href: "/galeria", label: "Galeria" },
           { href: "/kontakt", label: "Kontakt" },
         ]}

@@ -112,6 +112,19 @@ export function getOrganizationJsonLd() {
   };
 }
 
+export function getAreaServedJsonLd() {
+  return [
+    ...siteConfig.serviceRegions.map((region) => ({
+      "@type": "AdministrativeArea",
+      name: region,
+    })),
+    ...siteConfig.serviceAreas.map((city) => ({
+      "@type": "City",
+      name: city,
+    })),
+  ];
+}
+
 export function getLocalBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -135,10 +148,7 @@ export function getLocalBusinessJsonLd() {
       opens: hours.opens,
       closes: hours.closes,
     })),
-    areaServed: siteConfig.serviceAreas.map((city) => ({
-      "@type": "City",
-      name: city,
-    })),
+    areaServed: getAreaServedJsonLd(),
     description: siteConfig.description,
   };
 }

@@ -7,7 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { siteConfig } from "@/data/site-config";
 import { offerPages } from "@/data/offer-pages";
-import { absoluteUrl, buildMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { absoluteUrl, buildMetadata, getAreaServedJsonLd, getBreadcrumbJsonLd } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ offer: string }>;
@@ -67,10 +67,7 @@ export default async function OfferPage({ params }: PageProps) {
             name: siteConfig.name,
             url: siteConfig.siteUrl,
           },
-          areaServed: siteConfig.serviceAreas.map((city) => ({
-            "@type": "City",
-            name: city,
-          })),
+          areaServed: getAreaServedJsonLd(),
           description: page.description,
           url: absoluteUrl(`/oferta/${offer}`),
         }}
@@ -105,7 +102,7 @@ export default async function OfferPage({ params }: PageProps) {
         navLinks={[
           { href: "/", label: "Strona główna" },
           { href: "/oferta", label: "Oferta" },
-          { href: "/realizacje", label: "Realizacje" },
+          { href: "/obszar-dzialania", label: "Obszar działania" },
           { href: "/kontakt", label: "Kontakt" },
         ]}
       />

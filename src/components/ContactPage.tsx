@@ -297,7 +297,7 @@ export default function ContactPage() {
         navLinks={[
           { href: "/", label: "Strona główna" },
           { href: "/oferta", label: "Oferta" },
-          { href: "/realizacje", label: "Realizacje" },
+          { href: "/obszar-dzialania", label: "Obszar działania" },
           { href: "/galeria", label: "Galeria" },
         ]}
       />

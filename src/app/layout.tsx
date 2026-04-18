@@ -16,6 +16,8 @@ export const metadata: Metadata = {
       "bramy skrzydłowe",
       "furtki wejściowe",
       "ogrodzenia łódzkie",
+      "ogrodzenia mazowieckie",
+      "ogrodzenia świętokrzyskie",
     ],
   }),
   applicationName: siteConfig.name,

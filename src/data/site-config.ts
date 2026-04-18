@@ -1,3 +1,5 @@
+import { serviceCityNames, serviceRegionNames } from "@/data/service-areas";
+
 export const siteConfig = {
   name: "GAPYS",
   legalName: "GAPYS",
@@ -29,7 +31,8 @@ export const siteConfig = {
     { dayOfWeek: "Thursday", opens: "08:00", closes: "17:00" },
     { dayOfWeek: "Friday", opens: "08:00", closes: "17:00" },
   ],
-  serviceAreas: ["Warszawa", "Łódź", "Lublin", "Kielce", "Piaseczno", "Radom"],
+  serviceRegions: serviceRegionNames,
+  serviceAreas: serviceCityNames,
   socialLinks: [] as Array<{ label: string; href: string }>,
 } as const;
 
